@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 4.233 4.233" id="home">
+  <g transform="translate(73.405 -1.965)">
+    <g>
+      <g transform="translate(.046)">
+        <g transform="translate(0 -.007)">
+          <g>
+            <g transform="translate(-.14)">
+              <g transform="translate(-92.519 -.321)">
+                <g transform="translate(-.265)">
+                  <g>
+                    <g>
+                      <g transform="translate(0 -.132)">
+                        <g>
+                          <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".265" d="m 21.590268,2.8231919 c 0.265067,0 1.587507,1.0627149 1.587507,1.4872513 v 1.4224203 c 0,0.2931584 -0.236008,0.5291667 -0.529166,0.5291667 h -2.11667 c -0.293158,0 -0.529167,-0.2360083 -0.529167,-0.5291667 V 4.3104432 c 0,-0.4123977 1.322428,-1.4872513 1.587496,-1.4872513 z" paint-order="markers fill stroke"></path>
+                          <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".265" d="M 21.280408,6.1297386 V 4.8521043 c 0,-0.1716655 0.1382,-0.3098656 0.309866,-0.3098656 0.171665,0 0.309865,0.1382001 0.309865,0.3098656 v 1.2776343" paint-order="markers fill stroke"></path>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

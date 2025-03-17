@@ -15,6 +15,8 @@
 </head>
 
 <body>
+    <x-navbar></x-navbar>
+
     <main class="mx-auto w-[90%]">
         {{ $slot }}
     </main>
