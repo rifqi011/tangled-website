@@ -11,8 +11,16 @@ export default {
     ],
     theme: {
         extend: {
+            colors: {
+                black: "#111111",
+                purple: "#22177a",
+                red: "#ED6A6A",
+            },
+            boxShadow: {
+                navbar: "0px 2px 15px 0px rgba(0, 0, 0, 0.5)",
+            },
             fontFamily: {
-                urbanist: ["Urbanist", "sans-serif"]
+                urbanist: ["Urbanist", "sans-serif"],
             },
         },
     },
