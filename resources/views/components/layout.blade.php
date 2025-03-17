@@ -11,10 +11,13 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
     <link rel="shortcut icon" href="{{ asset('images/logo-icon-primary.svg') }}" type="image/x-icon">
+    <meta name="description" content="Tangled merupakan sebuah situs karya siswa SMK Negeri 1 Purwokerto untuk mempermudah pencarian barang hilang di lingkungan sekolah.">
 </head>
 
 <body>
-    <h1 class="text-3xl font-bold">Tangled</h1>
+    <main class="mx-auto w-[90%]">
+        {{ $slot }}
+    </main>
 </body>
 
 </html>
