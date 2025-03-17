@@ -18,6 +18,7 @@ export default {
             },
             boxShadow: {
                 navbar: "0px 2px 15px 0px rgba(0, 0, 0, 0.5)",
+                card: "0px 4px 20px 6px rgba(0, 0, 0, 0.5)",
             },
             fontFamily: {
                 urbanist: ["Urbanist", "sans-serif"],
