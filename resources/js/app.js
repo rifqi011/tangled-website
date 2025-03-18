@@ -68,3 +68,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+// telephone input
+document.addEventListener("DOMContentLoaded", function () {
+    const phoneInput = document.getElementById("userphone");
+
+    if (phoneInput) {
+        phoneInput.addEventListener("input", function () {
+            if (!this.value.startsWith("62")) {
+                this.value = "62" + this.value;
+            }
+        })
+
+        phoneInput.addEventListener("keydown", function (event) {
+            if ((event.key === 'Backspace' || event.key === 'Delete') && this.value.length <= 2) {
+                event.preventDefault();
+            }
+        })
+    }
+})
