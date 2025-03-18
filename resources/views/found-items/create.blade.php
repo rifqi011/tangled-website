@@ -1,11 +1,11 @@
 <x-layout>
-    <div class="flex flex-col gap-6 mb-24">
+    <div class="mb-24 flex flex-col gap-6">
         <h1 class="text-2xl font-bold">Buat Laporan Penemuan</h1>
 
         <div class="flex flex-col gap-3">
             <h2 class="text-xl font-semibold">Data Barang</h2>
 
-            <form class="flex flex-col gap-2">
+            <form action="{{ route('found-items.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-2">
                 @csrf
 
                 <div class="flex flex-col gap-1">
@@ -30,23 +30,25 @@
 
                 {{-- select categories --}}
                 <div class="flex flex-col gap-1">
-                    <label class="text-lg font-semibold">Kata Kunci</label>
+                    <label class="text-lg font-semibold">Kategori</label>
                     <div class="flex flex-wrap gap-2">
                         @foreach ($categories as $category)
-                            <x-button type="button" class="border-1 rounded-full border border-gray-500 bg-gray-100 text-sm text-black hover:bg-gray-200 focus:bg-purple focus:text-white">
+                            <x-button type="button" class="category-btn border border-gray-500 !bg-gray-100 text-sm !text-black !transition-all hover:bg-gray-200 focus:outline-none" data-id="{{ $category->id }}">
                                 {{ $category->name }}
                             </x-button>
                         @endforeach
                     </div>
+                    <input type="hidden" name="category_id" id="category_id" required>
                 </div>
 
+                {{-- Gambar --}}
                 <div class="flex flex-col gap-1">
                     <label for="photo" class="text-lg font-semibold">Gambar</label>
                     <label for="photo" class="cursor-pointer rounded-3xl bg-black px-4 py-2 text-center text-white">Upload Gambar</label>
-                    <input type="file" name="photo" id="photo" class="hidden">
+                    <input type="file" name="photo" id="photo" class="hidden" required>
                 </div>
 
-                <hr class="bg-black my-4">
+                <hr class="my-4 bg-black">
 
                 <x-button type="submit">Buat Laporan</x-button>
             </form>
