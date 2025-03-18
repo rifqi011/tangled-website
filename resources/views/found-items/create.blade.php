@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="mb-24 flex flex-col gap-6">
+    <div class="mb-8 flex flex-col gap-6">
         <h1 class="text-2xl font-bold">Buat Laporan Penemuan</h1>
 
         <div class="flex flex-col gap-3">
