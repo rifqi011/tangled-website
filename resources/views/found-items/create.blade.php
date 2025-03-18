@@ -44,7 +44,7 @@
                 {{-- Gambar --}}
                 <div class="flex flex-col gap-1">
                     <label for="photo" class="text-lg font-semibold">Gambar</label>
-                    <label for="photo" class="cursor-pointer rounded-3xl bg-black px-4 py-2 text-center text-white">Upload Gambar</label>
+                    <label for="photo" id="upload-label" class="cursor-pointer rounded-3xl bg-black px-4 py-2 text-center text-white">Upload Gambar</label>
                     <input type="file" name="photo" id="photo" class="hidden" required>
                 </div>
 
