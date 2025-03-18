@@ -18,7 +18,11 @@
 
                 <div class="flex flex-col gap-1">
                     <label for="class_id" class="text-lg font-semibold">Masukan Kelas</label>
-                    <input type="text" name="class_id" id="class_id" class="border-1 w-full rounded-2xl bg-gray-200 px-4 py-2 text-black placeholder:text-black" autocomplete="off" placeholder="Kelas pelapor" required maxlength="20">
+                    <select name="class_id" id="class_id" class="border-1 w-full rounded-2xl bg-gray-200 bg-no-repeat px-4 py-2 text-black placeholder:text-black" style="appearance: none; background-image: url('/images/icons/angle-down.svg'); background-position: right 0.7rem center;">
+                        @foreach ($classes as $class)
+                            <option value="{{ $class->id }}">{{ $class->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 
@@ -39,7 +43,7 @@
 
                 <div class="flex flex-col gap-1">
                     <label for="lost_date" class="text-lg font-semibold">Tanggal Kehilangan</label>
-                    <input type="date" name="last_date" id="last_date" class="border-1 w-full rounded-2xl bg-gray-200 px-4 py-2 text-black placeholder:text-black" autocomplete="off" placeholder="Tanggal Kehilangan" required>
+                    <input type="date" name="lost_date" id="lost_date" class="border-1 w-full rounded-2xl bg-gray-200 px-4 py-2 text-black placeholder:text-black" autocomplete="off" placeholder="Tanggal Kehilangan" required>
                 </div>
 
                 <div class="flex flex-col gap-1">
