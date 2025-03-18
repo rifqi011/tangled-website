@@ -56,17 +56,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const photoInput = document.getElementById("photo");
     const uploadLabel = document.getElementById("upload-label");
 
-    photoInput.addEventListener("change", function () {
-        if (photoInput.value) {
-            uploadLabel.textContent = "Gambar Terunggah";
-            uploadLabel.classList.add("bg-purple");
-            uploadLabel.classList.remove("bg-black");
-        } else {
-            uploadLabel.textContent = "Upload Gambar";
-            uploadLabel.classList.add("bg-black");
-            uploadLabel.classList.remove("bg-purple");
-        }
-    });
+    if (photoInput && uploadLabel) {
+        photoInput.addEventListener("change", function () {
+            if (photoInput.value) {
+                uploadLabel.textContent = "Gambar Terunggah";
+                uploadLabel.classList.add("bg-purple");
+                uploadLabel.classList.remove("bg-black");
+            } else {
+                uploadLabel.textContent = "Upload Gambar";
+                uploadLabel.classList.add("bg-black");
+                uploadLabel.classList.remove("bg-purple");
+            }
+        });
+    }
 });
 
 // telephone input
