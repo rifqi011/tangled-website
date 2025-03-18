@@ -1,4 +1,6 @@
-<footer class="flex flex-col items-center justify-center w-full mb-24 text-2xl font-medium gap-2">
+<hr class="my-4 bg-black w-[90%] mx-auto">
+
+<footer class="mb-24 flex w-full flex-col items-center justify-center gap-2 text-2xl font-medium">
     <p>&copy; {{ date('Y') }} Tangled. All rights reserved</p>
     <p>Made with ❤️ by <a href="#" class="font-semibold underline">Shifu Tech</a></p>
     <div class="flex gap-4">
