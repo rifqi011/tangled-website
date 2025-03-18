@@ -28,7 +28,7 @@
             @if ($foundItems->isNotEmpty())
                 @foreach ($foundItems as $item)
                     <a href="{{ $item->slug }}" class="group flex gap-2 rounded-3xl bg-white shadow-card">
-                        <img src="{{ asset($item->photo) }}" class="min-h-[180px] w-[35%] overflow-hidden rounded-l-3xl bg-gray-200 bg-center object-cover" alt="{{ $item->title }}">
+                        <img src="{{ asset($item->photo) }}" class="min-h-[180px] w-[35%] overflow-hidden rounded-l-3xl bg-gray-200 bg-center object-cover" loading="lazy" alt="{{ $item->title }}">
 
                         <div class="flex h-full w-2/3 flex-col justify-start gap-3 p-2 pl-0">
                             <p class="self-start rounded-3xl bg-red px-5 text-lg capitalize text-white">
@@ -37,7 +37,7 @@
 
                             <h3 class="text-2xl font-semibold">{{ Str::limit($item->title, 25) }}</h3>
 
-                            <p>Ditemukan di {{ $item->found_location }} sejak {{ \Carbon\Carbon::parse($item->found_date)->locale('id')->translatedFormat('d F Y') }}</p>
+                            <p>Ditemukan di <strong>{{ $item->found_location }}</strong> pada {{ \Carbon\Carbon::parse($item->found_date)->locale('id')->translatedFormat('d F Y') }}</p>
                         </div>
                     </a>
                 @endforeach
