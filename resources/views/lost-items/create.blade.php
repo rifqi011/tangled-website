@@ -2,7 +2,9 @@
     <div class="mb-24 flex flex-col gap-6">
         <h1 class="text-2xl font-bold">Buat Laporan Kehilangan</h1>
 
-        <div class="flex flex-col gap-3">
+        <form action="{{ route('lost-items.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-3">
+            @csrf
+
             <h2 class="text-xl font-semibold">Identitas Pelapor</h2>
 
             <div class="flex flex-col gap-2">
@@ -75,6 +77,6 @@
 
                 <x-button type="submit">Buat Laporan</x-button>
             </div>
-        </div>
+        </form>
     </div>
 </x-layout>
