@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="mb-24 flex flex-col gap-6">
+    <div class="mb-8 flex flex-col gap-6">
         <h1 class="text-2xl font-bold">Buat Laporan Kehilangan</h1>
 
         <form action="{{ route('lost-items.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-3">

@@ -22,6 +22,8 @@
     <main class="mx-auto w-[90%]">
         {{ $slot }}
     </main>
+
+    <x-footer></x-footer>
 </body>
 
 </html>
