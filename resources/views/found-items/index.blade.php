@@ -1,10 +1,10 @@
 <x-layout>
-    <div class="mb-8 mt-6 flex flex-col gap-6">
+    <div class="mb-8 flex flex-col gap-6">
         <div class="flex gap-3 items-center">
             <a href="/home">
                 <img src="{{ asset('/images/icons/chevron-left.svg') }}" class="aspect-square h-8" alt="chevron left">
             </a>
-            <h1 class="text-2xl font-bold">Barang Disimpan Kesiswaan</h1>
+            <h1 class="text-2xl font-bold">Barang Temuan</h1>
         </div>
 
         <div class="flex flex-col gap-3">
@@ -14,7 +14,7 @@
                         <img src="{{ asset($item->photo) }}" class="min-h-[180px] w-[35%] overflow-hidden rounded-l-3xl bg-gray-200 bg-center object-cover" loading="lazy" alt="{{ $item->title }}">
 
                         <div class="flex h-full w-2/3 flex-col justify-start gap-3 p-2 pl-0">
-                            <p class="self-start rounded-3xl bg-red px-5 text-lg capitalize text-white">
+                            <p class="self-start rounded-3xl px-5 text-lg capitalize text-white {{ $item->status === 'disimpan' ? 'bg-red' : 'bg-green' }}">
                                 {{ $item->status }}
                             </p>
 
