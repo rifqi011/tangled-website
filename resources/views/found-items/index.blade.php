@@ -33,5 +33,5 @@
         </div>
     </div>
 
-    {{ $foundItems->links('pagination::tailwind') }}
+    {{ $foundItems->links('vendor.pagination.tailwind') }}
 </x-layout>
