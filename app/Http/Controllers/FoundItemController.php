@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class FoundItemController extends Controller
 {
     public function index() {
-        $foundItems = FoundItem::where('status', 'disimpan')->latest()->paginate(10)->withQueryString();
+        $foundItems = FoundItem::where('status', 'disimpan')->latest()->paginate(20)->withQueryString();
 
         return view('found-items.index', compact('foundItems'));
     }
