@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class FoundItemController extends Controller
 {
+    public function index() {
+        $foundItems = FoundItem::where('status', 'disimpan')->latest()->paginate(10)->withQueryString();
+
+        return view('found-items.index', compact('foundItems'));
+    }
+
     public function create()
     {
         $categories = Category::where('status', 'active')->get();
