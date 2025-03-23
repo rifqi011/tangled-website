@@ -1,10 +1,20 @@
 /* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-    font-family: 'Urbanist', sans-serif;
+    font-family: "Urbanist", sans-serif;
+}
+
+/* Swiper */
+@layer components {
+    .custom-bullet {
+        @apply h-1 w-4 transition-all duration-300 ease-in-out rounded-lg !important;
+    }
+    .swiper-pagination-bullet-active.custom-bullet {
+        @apply w-8 bg-gray-600 !important;
+    }
 }
