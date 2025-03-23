@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::redirect('/home', '/', 301);
 
+// found items page
+Route::get('/found-items', [FoundItemController::class, 'index'])->name('found-items.index');
+
 // report page
 Route::get('/found', [FoundItemController::class, 'create'])->name('found-items.create');
 Route::post('/found/store', [FoundItemController::class, 'store'])->name('found-items.store');
