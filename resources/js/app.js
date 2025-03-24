@@ -80,12 +80,39 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!this.value.startsWith("62")) {
                 this.value = "62" + this.value;
             }
-        })
+        });
 
         phoneInput.addEventListener("keydown", function (event) {
-            if ((event.key === 'Backspace' || event.key === 'Delete') && this.value.length <= 2) {
+            if (
+                (event.key === "Backspace" || event.key === "Delete") &&
+                this.value.length <= 2
+            ) {
                 event.preventDefault();
             }
-        })
+        });
     }
-})
+});
+
+// filter modal
+const filterButton = document.getElementById("filter-button");
+
+if (filterButton) {
+    filterButton.addEventListener("click", function () {
+        const topBar = document.getElementById("top-bar");
+        const middleBar = document.getElementById("middle-bar");
+        const bottomBar = document.getElementById("bottom-bar");
+
+        const filterModal = document.getElementById("filter-modal");
+        filterModal.classList.toggle("-translate-y-[160%]");
+
+        topBar.classList.toggle("rotate-45");
+        topBar.classList.toggle("translate-y-3");
+        topBar.classList.toggle("w-12");
+        
+        middleBar.classList.toggle("opacity-0");
+        
+        bottomBar.classList.toggle("-rotate-45");
+        bottomBar.classList.toggle("-translate-y-3");
+        bottomBar.classList.toggle("w-10");
+    });
+}
