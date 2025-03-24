@@ -15,6 +15,7 @@ export default {
                 black: "#111111",
                 purple: "#22177a",
                 red: "#ED6A6A",
+                green: "#1F7D53",
             },
             boxShadow: {
                 navbar: "0px 2px 15px 0px rgba(0, 0, 0, 0.5)",
