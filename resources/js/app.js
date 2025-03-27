@@ -30,27 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// category
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".category-btn").forEach((button) => {
-        button.addEventListener("click", function () {
-            // Hapus warna dari semua tombol
-            document.querySelectorAll(".category-btn").forEach((btn) => {
-                btn.classList.remove("!bg-purple", "!text-white");
-                btn.classList.add("!bg-gray-100", "!text-black");
-            });
-
-            // Tambahkan warna ke tombol yang dipilih
-            this.classList.add("!bg-purple", "!text-white");
-            this.classList.remove("!bg-gray-100", "!text-black");
-
-            // Simpan category_id ke hidden input
-            document.getElementById("category_id").value =
-                this.getAttribute("data-id");
-        });
-    });
-});
-
 // picture upload label
 document.addEventListener("DOMContentLoaded", function () {
     const photoInput = document.getElementById("photo");
@@ -107,12 +86,39 @@ if (filterButton) {
 
         topBar.classList.toggle("rotate-45");
         topBar.classList.toggle("translate-y-3");
-        topBar.classList.toggle("w-12");
-        
+        topBar.classList.toggle("!w-10");
+
         middleBar.classList.toggle("opacity-0");
-        
+
         bottomBar.classList.toggle("-rotate-45");
         bottomBar.classList.toggle("-translate-y-3");
-        bottomBar.classList.toggle("w-10");
+        bottomBar.classList.toggle("!w-10");
     });
 }
+
+// categories in search modal
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const categoryButtons = document.querySelectorAll(".category-btn");
+    const categoryInput = document.getElementById("category_id");
+
+    categoryButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+            // Remove active state from all buttons
+            categoryButtons.forEach((btn) => {
+                btn.classList.remove("!bg-purple", "!text-white");
+                btn.classList.add("!bg-gray-100", "!text-black");
+            });
+
+            // Add active state to clicked button
+            this.classList.add("!bg-purple", "!text-white");
+            this.classList.remove("!bg-gray-100", "!text-black");
+
+            // Update hidden input
+            categoryInput.value = this.getAttribute("data-id");
+
+            // Submit form
+            form.submit();
+        });
+    });
+});
