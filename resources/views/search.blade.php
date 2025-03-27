@@ -57,8 +57,12 @@
                 </a>
             @endforeach
         @else
-            <div class="py-10 text-center text-xl text-gray-500">
-                Tidak ada data yang ditemukan
+            <div class="py-10 text-center text-xl">
+                <img src="{{ asset('images/search-not-found.png') }}" alt="">
+
+                <p class="text-2xl font-semibold">Coba gunakan kata kunci lainnya atau buat laporan kehilangan</p>
+
+                <x-button href="lost" class="mt-6">Buat laporan</x-button>
             </div>
         @endif
     </div>
