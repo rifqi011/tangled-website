@@ -16,6 +16,9 @@ Route::get('/found-items', [FoundItemController::class, 'index'])->name('found-i
 Route::get('/found', [FoundItemController::class, 'create'])->name('found-items.create');
 Route::post('/found/store', [FoundItemController::class, 'store'])->name('found-items.store');
 
+// report found page
+Route::get('lost-items', [LostItemController::class, 'index'])->name('lost-items.index');
+
 // report lost page
 Route::get('/lost', [LostItemController::class, 'create'])->name('lost-items.create');
 Route::post('/lost/store', [LostItemController::class, 'store'])->name('lost-items.store');
