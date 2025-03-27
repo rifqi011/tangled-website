@@ -20,7 +20,7 @@
 
                             <h3 class="text-2xl font-semibold">{{ Str::limit($item->title, 25) }}</h3>
 
-                            <p>Hilang di <strong>{{ $item->found_location }}</strong> pada {{ \Carbon\Carbon::parse($item->found_date)->locale('id')->translatedFormat('d F Y') }}</p>
+                            <p>Hilang di <strong>{{ $item->last_location }}</strong> pada {{ \Carbon\Carbon::parse($item->lost_date)->locale('id')->translatedFormat('d F Y') }}</p>
                         </div>
                     </a>
                 @endforeach
