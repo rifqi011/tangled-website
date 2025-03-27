@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class LostItemController extends Controller
 {
+    public function index() {
+        $lostItems = LostItem::where('status', '!=', 'diproses')->latest()->paginate(20)->withQueryString();
+
+        return view('lost-items.index', compact('lostItems'));
+    }
+
     public function create()
     {
         $categories = Category::where('status', 'active')->get();
