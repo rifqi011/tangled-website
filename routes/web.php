@@ -3,6 +3,7 @@
 use App\Http\Controllers\FoundItemController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LostItemController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -18,3 +19,6 @@ Route::post('/found/store', [FoundItemController::class, 'store'])->name('found-
 // report lost page
 Route::get('/lost', [LostItemController::class, 'create'])->name('lost-items.create');
 Route::post('/lost/store', [LostItemController::class, 'store'])->name('lost-items.store');
+
+// Search page
+Route::get('/search', [SearchController::class, 'index'])->name('search.index');
