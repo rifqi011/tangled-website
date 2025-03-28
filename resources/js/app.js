@@ -30,17 +30,45 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+// select category
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".select-category-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+            // Hapus warna dari semua tombol
+            document.querySelectorAll(".select-category-btn").forEach((btn) => {
+                btn.classList.remove("!bg-purple", "!text-white");
+                btn.classList.add("!bg-gray-100", "!text-black");
+            });
+
+            // Tambahkan warna ke tombol yang dipilih
+            this.classList.add("!bg-purple", "!text-white");
+            this.classList.remove("!bg-gray-100", "!text-black");
+
+            // Simpan category_id ke hidden input
+            document.getElementById("category_id").value =
+                this.getAttribute("data-id");
+        });
+    });
+});
+
 // picture upload label
 document.addEventListener("DOMContentLoaded", function () {
     const photoInput = document.getElementById("photo");
     const uploadLabel = document.getElementById("upload-label");
+    const fileChosen = document.getElementById("file-chosen");
 
-    if (photoInput && uploadLabel) {
+    if (photoInput && uploadLabel && fileChosen) {
         photoInput.addEventListener("change", function () {
             if (photoInput.value) {
                 uploadLabel.textContent = "Gambar Terunggah";
                 uploadLabel.classList.add("bg-purple");
                 uploadLabel.classList.remove("bg-black");
+                
+                if (this.files && this.files.length > 0) {
+                    fileChosen.textContent = this.files[0].name;
+                } else {
+                    fileChosen.textContent = "Tidak ada file dipilih";
+                }
             } else {
                 uploadLabel.textContent = "Upload Gambar";
                 uploadLabel.classList.add("bg-black");

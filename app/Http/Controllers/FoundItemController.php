@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\FoundItem;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FoundItemController extends Controller
 {
@@ -24,15 +25,40 @@ class FoundItemController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input
-        $request->validate([
+        // Custom validation messages
+        $messages = [
+            'title.required' => 'Nama barang harus diisi.',
+            'title.max' => 'Nama barang maksimal 255 karakter.',
+            'found_location.required' => 'Lokasi penemuan harus diisi.',
+            'found_location.max' => 'Lokasi penemuan maksimal 255 karakter.',
+            'found_date.required' => 'Tanggal penemuan harus diisi.',
+            'found_date.date' => 'Tanggal penemuan harus berupa tanggal yang valid.',
+            'found_date.after_or_equal' => 'Tanggal penemuan tidak boleh lebih dari 3 tahun yang lalu.',
+            'description.required' => 'Deskripsi barang harus diisi.',
+            'category_id.required' => 'Kategori barang harus dipilih.',
+            'photo.required' => 'Gambar barang harus diunggah.',
+            'photo.image' => 'File harus berupa gambar.',
+            'photo.mimes' => 'Gambar harus berformat jpeg, png, atau jpg.',
+            'photo.max' => 'Ukuran gambar maksimal 2MB.',
+        ];
+
+        // Validation
+        $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'found_location' => 'required|string|max:255',
             'found_date' => 'required|date|after_or_equal:' . now()->subYears(3)->format('Y-m-d'),
             'description' => 'required|string',
             'category_id' => 'required|exists:categories,id',
             'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+        ], $messages);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Terdapat kesalahan dalam pengisian formulir.');
+        }
 
         // Upload gambar jika ada
         $photoPath = null;
