@@ -41,7 +41,7 @@ class LostItemController extends Controller
 
         // Simpan gambar jika ada upload
         if ($request->hasFile('photo')) {
-            $photoPath = 'storage/' . $request->file('photo')->store('lost-images', 'public');
+            $photoPath = $request->file('photo')->store('lost-images', 'public');
         }
 
         LostItem::create([
