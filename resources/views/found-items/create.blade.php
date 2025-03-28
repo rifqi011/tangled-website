@@ -33,7 +33,7 @@
                     <label class="text-lg font-semibold">Kategori</label>
                     <div class="flex flex-wrap gap-2">
                         @foreach ($categories as $category)
-                            <x-button type="button" class="category-btn border border-gray-500 !bg-gray-100 text-sm !text-black !transition-all hover:bg-gray-200 focus:outline-none" data-id="{{ $category->id }}">
+                            <x-button type="button" class="select-category-btn border border-gray-500 !bg-gray-100 text-sm !text-black !transition-all hover:bg-gray-200 focus:outline-none" data-id="{{ $category->id }}">
                                 {{ $category->name }}
                             </x-button>
                         @endforeach
