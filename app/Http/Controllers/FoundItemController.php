@@ -79,4 +79,11 @@ class FoundItemController extends Controller
 
         return redirect()->route('home')->with('success', 'Laporan berhasil dikirim!');
     }
+
+    // show item
+    public function show($slug)
+    {
+        $foundItem = FoundItem::where('slug', $slug)->firstOrFail();
+        return view('found-items.show', compact('foundItem'));
+    }
 }

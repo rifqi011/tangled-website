@@ -11,12 +11,13 @@ Route::redirect('/home', '/', 301);
 
 // found items page
 Route::get('/found-items', [FoundItemController::class, 'index'])->name('found-items.index');
+Route::get('/found-items/{slug}', [FoundItemController::class, 'show'])->name('found-items.show');
 
 // report page
 Route::get('/found', [FoundItemController::class, 'create'])->name('found-items.create');
 Route::post('/found/store', [FoundItemController::class, 'store'])->name('found-items.store');
 
-// report found page
+// lost items page
 Route::get('lost-items', [LostItemController::class, 'index'])->name('lost-items.index');
 
 // report lost page
