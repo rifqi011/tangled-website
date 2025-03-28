@@ -20,7 +20,7 @@ class LostItemFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(3, false),
-            'slug' => '/lost-items/' . $this->faker->slug(3, false),
+            'slug' => $this->faker->slug(3, false),
             'username' => $this->faker->name(),
             'userphone' => $this->faker->phoneNumber(),
             'class_id' => ClassModel::inRandomOrder()->first()?->id ?? 1, // Ambil dari factory Class
