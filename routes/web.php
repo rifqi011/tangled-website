@@ -19,6 +19,7 @@ Route::post('/found/store', [FoundItemController::class, 'store'])->name('found-
 
 // lost items page
 Route::get('lost-items', [LostItemController::class, 'index'])->name('lost-items.index');
+Route::get('/lost-items/{slug}', [LostItemController::class, 'show'])->name('lost-items.show');
 
 // report lost page
 Route::get('/lost', [LostItemController::class, 'create'])->name('lost-items.create');

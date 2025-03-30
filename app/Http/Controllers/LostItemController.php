@@ -100,4 +100,15 @@ class LostItemController extends Controller
 
         return redirect()->route('home')->with('success', 'Laporan barang hilang berhasil dikirim!');
     }
+
+    // show
+    public function show($slug)
+    {
+        $lostItem = LostItem::with('class')
+            ->where('slug', $slug)
+            ->where('status', '!=', 'diproses')
+            ->firstOrFail();
+
+        return view('lost-items.show', compact('lostItem'));
+    }
 }
