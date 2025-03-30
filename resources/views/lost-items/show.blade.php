@@ -24,6 +24,7 @@
         <div class="flex flex-col text-xl">
             <p><span class="font-semibold">Tanggal hilang: </span>{{ $lostItem->lost_date }}</p>
             <p><span class="font-semibold">Lokasi terakhir: </span>{{ $lostItem->last_location }}</p>
+            <p><span class="font-semibold">Kategori: </span>{{ $lostItem->category->name }}</p>
             <p><span class="font-semibold">Deskripsi: </span>{{ $lostItem->description }}</p>
         </div>
     </div>

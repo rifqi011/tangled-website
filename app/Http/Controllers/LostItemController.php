@@ -104,7 +104,7 @@ class LostItemController extends Controller
     // show
     public function show($slug)
     {
-        $lostItem = LostItem::with('class')
+        $lostItem = LostItem::with(['class', 'category'])
             ->where('slug', $slug)
             ->where('status', '!=', 'diproses')
             ->firstOrFail();

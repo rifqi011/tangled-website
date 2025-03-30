@@ -17,6 +17,7 @@
         <div class="flex flex-col text-xl">
             <p><span class="font-semibold">Tanggal ditemukan: </span>{{ $foundItem->found_date }}</p>
             <p><span class="font-semibold">Lokasi ditemukan: </span>{{ $foundItem->found_location }}</p>
+            <p><span class="font-semibold">Kategori: </span>{{ $foundItem->category->name }}</p>
             <p><span class="font-semibold">Deskripsi: </span>{{ $foundItem->description }}</p>
         </div>  
 

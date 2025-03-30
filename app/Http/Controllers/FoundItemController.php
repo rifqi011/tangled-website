@@ -83,7 +83,10 @@ class FoundItemController extends Controller
     // show item
     public function show($slug)
     {
-        $foundItem = FoundItem::where('slug', $slug)->firstOrFail();
+        $foundItem = FoundItem::with('category')
+            ->where('slug', $slug)
+            ->where('status', '!=', 'diproses')
+            ->firstOrFail();
         return view('found-items.show', compact('foundItem'));
     }
 }
