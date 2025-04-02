@@ -2,7 +2,7 @@
     <div class="relative left-0 top-0 flex items-start justify-between bg-white bg-clip-content pb-5 pt-3">
         <h2 class="text-2xl font-bold">{{ $lostItem->title }}</h2>
 
-        <a href="/home">
+        <a href="{{ url()->previous() !== url()->current() ? url()->previous() : route('lost-items.index') }}">
             <img src="{{ asset('images/icons/x.svg') }}" class="w-10" alt="x icon">
         </a>
     </div>

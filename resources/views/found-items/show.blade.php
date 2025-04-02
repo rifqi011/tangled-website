@@ -2,7 +2,7 @@
     <div class="relative left-0 top-0 flex items-start justify-between bg-white bg-clip-content pb-5 pt-3">
         <h2 class="text-2xl font-bold">{{ $foundItem->title }}</h2>
 
-        <a href="/home">
+        <a href="{{ url()->previous() !== url()->current() ? url()->previous() : route('found-items.index') }}">
             <img src="{{ asset('images/icons/x.svg') }}" class="w-10" alt="x icon">
         </a>
     </div>
@@ -19,7 +19,7 @@
             <p><span class="font-semibold">Lokasi ditemukan: </span>{{ $foundItem->found_location }}</p>
             <p><span class="font-semibold">Kategori: </span>{{ $foundItem->category->name }}</p>
             <p><span class="font-semibold">Deskripsi: </span>{{ $foundItem->description }}</p>
-        </div>  
+        </div>
 
         <hr class="my-4 bg-black">
 
