@@ -1,15 +1,16 @@
 @php
     $currentRoute = request()->path();
 
-    function isSearch($path)
+    function shouldHideHeader($path)
     {
-        return $path === 'search';
+        return $path === 'search' || preg_match('/^(lost-items|found-items)\/[^\/]+$/', $path);
     }
 
-    $isSearchPage = isSearch($currentRoute);
+    $isHeaderHidden = shouldHideHeader($currentRoute);
+
 @endphp
 
-<header id="header" class="relative left-0 top-0 items-center justify-center bg-white px-[5%] pb-5 pt-3 mb-3 {{ $isSearchPage ? 'hidden' : 'flex' }}">
+<header id="header" class="{{ $isHeaderHidden ? 'hidden' : 'flex' }} relative left-0 top-0 mb-3 items-center justify-center bg-white px-[5%] pb-5 pt-3">
     <div class="flex w-full items-center justify-between">
         <a href="/">
             <img src="{{ asset('images/logo-text.svg') }}" alt="">
