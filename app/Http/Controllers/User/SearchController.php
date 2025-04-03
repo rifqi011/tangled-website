@@ -56,6 +56,6 @@ class SearchController extends Controller
             ->orderBy('date', 'desc')
             ->get();
 
-        return view('search', compact(['categories', 'items']));
+        return view('user.search', compact(['categories', 'items']));
     }
 }

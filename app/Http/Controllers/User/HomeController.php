@@ -12,6 +12,6 @@ class HomeController extends Controller
     {
         $foundItems = FoundItem::where('status', 'disimpan')->latest()->take(20)->get();
 
-        return view('home', compact('foundItems'));
+        return view('user.home', compact('foundItems'));
     }
 }
