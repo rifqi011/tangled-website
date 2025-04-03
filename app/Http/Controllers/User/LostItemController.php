@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\LostItem;
 use App\Models\ClassModel;
@@ -15,14 +16,14 @@ class LostItemController extends Controller
     {
         $lostItems = LostItem::where('status', '!=', 'diproses')->latest()->paginate(20)->withQueryString();
 
-        return view('lost-items.index', compact('lostItems'));
+        return view('user.lost-items.index', compact('lostItems'));
     }
 
     public function create()
     {
         $categories = Category::where('status', 'active')->get();
         $classes = ClassModel::where('status', 'active')->get();
-        return view('lost-items.create', compact('categories', 'classes'));
+        return view('user.lost-items.create', compact('categories', 'classes'));
     }
 
     public function store(Request $request)
@@ -109,6 +110,6 @@ class LostItemController extends Controller
             ->where('status', '!=', 'diproses')
             ->firstOrFail();
 
-        return view('lost-items.show', compact('lostItem'));
+        return view('user.lost-items.show', compact('lostItem'));
     }
 }

@@ -1,4 +1,4 @@
-<x-layout>
+<x-user.layout>
     <div class="relative left-0 top-0 flex items-start justify-between bg-white bg-clip-content pb-5 pt-3">
         <h2 class="text-2xl font-bold">{{ $foundItem->title }}</h2>
 
@@ -23,6 +23,6 @@
 
         <hr class="my-4 bg-black">
 
-        <x-button href="https://wa.me/{{ env('ADMIN_PHONE_NUMBER') }}?text=Assalamu'alaikum%20Wr.Wb.%0A%0APermisi%20pak,%20barang%20berjudul%20{{ $foundItem->title }}%20apakah%20masih%20disimpan%20di%20kesiswaan?%0ABarang%20tersebut%20adalah%20milik%20saya.%20Saya%20mohon%20konfirmasi%20dan%20waktu%20pengambilannya.%0ATerima%20kasih.%0A%0AWassalamu'alaikum%20Wr.Wb." target="_blank">Hubungi Admin</x-button>
+        <x-user.button href="https://wa.me/{{ env('ADMIN_PHONE_NUMBER') }}?text=Assalamu'alaikum%20Wr.Wb.%0A%0APermisi%20pak,%20barang%20berjudul%20{{ $foundItem->title }}%20apakah%20masih%20disimpan%20di%20kesiswaan?%0ABarang%20tersebut%20adalah%20milik%20saya.%20Saya%20mohon%20konfirmasi%20dan%20waktu%20pengambilannya.%0ATerima%20kasih.%0A%0AWassalamu'alaikum%20Wr.Wb." target="_blank">Hubungi Admin</x-user.button>
     </div>
-</x-layout>
+</x-user.layout>

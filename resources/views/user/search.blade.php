@@ -1,4 +1,4 @@
-<x-layout>
+<x-user.layout>
     <div class="relative left-0 top-0 mb-3 items-center justify-center bg-white bg-clip-content pb-5 pt-3">
         <div class="flex w-full items-center justify-between gap-4">
             <form method="GET" action="{{ route('search.index') }}" class="flex w-full items-center gap-3 rounded-3xl border-2 border-black px-3 py-1">
@@ -62,8 +62,8 @@
 
                 <p class="text-2xl font-semibold">Coba gunakan kata kunci lainnya atau buat laporan kehilangan</p>
 
-                <x-button href="lost" class="mt-6">Buat laporan</x-button>
+                <x-user.button href="lost" class="mt-6">Buat laporan</x-user.button>
             </div>
         @endif
     </div>
-</x-layout>
+</x-user.layout>

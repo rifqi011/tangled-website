@@ -1,26 +1,26 @@
-<x-layout>
+<x-user.layout>
     <div class="mb-8 flex flex-col gap-6">
-        <div class="flex items-center gap-3">
+        <div class="flex gap-3 items-center">
             <a href="/home">
                 <img src="{{ asset('/images/icons/chevron-left.svg') }}" class="aspect-square h-8" alt="chevron left">
             </a>
-            <h1 class="text-2xl font-bold">Barang Hilang</h1>
+            <h1 class="text-2xl font-bold">Barang Temuan</h1>
         </div>
 
         <div class="flex flex-col gap-3">
-            @if ($lostItems->isNotEmpty())
-                @foreach ($lostItems as $item)
-                    <a href="{{ route('lost-items.show', $item->slug ?? '#') }}" class="group flex gap-2 rounded-3xl bg-white shadow-card">
+            @if ($foundItems->isNotEmpty())
+                @foreach ($foundItems as $item)
+                    <a href="{{ route('found-items.show', $item->slug ?? '#') }}" class="group flex gap-2 rounded-3xl bg-white shadow-card">
                         <img src="{{ asset($item->photo) }}" class="min-h-[180px] w-[35%] overflow-hidden rounded-l-3xl bg-gray-200 bg-center object-cover" loading="lazy" alt="{{ $item->title }}">
 
                         <div class="flex h-full w-2/3 flex-col justify-start gap-3 p-2 pl-0">
-                            <p class="{{ $item->status === 'disimpan' ? 'bg-red' : ($item->status === 'hilang' ? 'bg-purple' : 'bg-green') }} self-start rounded-3xl px-5 text-lg capitalize text-white">
+                            <p class="self-start rounded-3xl px-5 text-lg capitalize text-white {{ $item->status === 'disimpan' ? 'bg-red' : 'bg-green' }}">
                                 {{ $item->status }}
                             </p>
 
                             <h3 class="text-2xl font-semibold">{{ Str::limit($item->title, 25) }}</h3>
 
-                            <p>Hilang di <strong>{{ $item->last_location }}</strong> pada {{ \Carbon\Carbon::parse($item->lost_date)->locale('id')->translatedFormat('d F Y') }}</p>
+                            <p>Ditemukan di <strong>{{ $item->found_location }}</strong> pada {{ \Carbon\Carbon::parse($item->found_date)->locale('id')->translatedFormat('d F Y') }}</p>
                         </div>
                     </a>
                 @endforeach
@@ -33,5 +33,5 @@
         </div>
     </div>
 
-    {{ $lostItems->links('vendor.pagination.tailwind') }}
-</x-layout>
+    {{ $foundItems->links('vendor.pagination.tailwind') }}
+</x-user.layout>

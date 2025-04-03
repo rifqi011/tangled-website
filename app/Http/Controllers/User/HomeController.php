@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\FoundItem;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $foundItems = FoundItem::where('status', 'disimpan')->latest()->take(20)->get();
 
-        return view('home', compact('foundItems'));
+        return view('user.home', compact('foundItems'));
     }
 }

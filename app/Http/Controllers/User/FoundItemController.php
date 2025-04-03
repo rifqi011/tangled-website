@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\FoundItem;
 use Illuminate\Support\Str;
@@ -14,13 +15,13 @@ class FoundItemController extends Controller
     {
         $foundItems = FoundItem::whereIn('status', ['disimpan', 'diambil'])->latest()->paginate(20)->withQueryString();
 
-        return view('found-items.index', compact('foundItems'));
+        return view('user.found-items.index', compact('foundItems'));
     }
 
     public function create()
     {
         $categories = Category::where('status', 'active')->get();
-        return view('found-items.create', compact('categories'));
+        return view('user.found-items.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -87,6 +88,6 @@ class FoundItemController extends Controller
             ->where('slug', $slug)
             ->where('status', '!=', 'diproses')
             ->firstOrFail();
-        return view('found-items.show', compact('foundItem'));
+        return view('user.found-items.show', compact('foundItem'));
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\FoundItemController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LostItemController;
-use App\Http\Controllers\SearchController;
+use App\Http\Controllers\User\FoundItemController;
+use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\LostItemController;
+use App\Http\Controllers\User\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');

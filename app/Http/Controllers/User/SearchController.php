@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,6 +56,6 @@ class SearchController extends Controller
             ->orderBy('date', 'desc')
             ->get();
 
-        return view('search', compact(['categories', 'items']));
+        return view('user.search', compact(['categories', 'items']));
     }
 }

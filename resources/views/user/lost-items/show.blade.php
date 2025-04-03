@@ -1,4 +1,4 @@
-<x-layout>
+<x-user.layout>
     <div class="relative left-0 top-0 flex items-start justify-between bg-white bg-clip-content pb-5 pt-3">
         <h2 class="text-2xl font-bold">{{ $lostItem->title }}</h2>
 
@@ -28,4 +28,4 @@
             <p><span class="font-semibold">Deskripsi: </span>{{ $lostItem->description }}</p>
         </div>
     </div>
-</x-layout>
+</x-user.layout>
