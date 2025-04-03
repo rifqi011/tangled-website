@@ -19,7 +19,7 @@ class FoundItemFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(3, false),
-            'slug' => '/found-items/' . $this->faker->slug(3, false),
+            'slug' => $this->faker->slug(3, false),
             'description' => $this->faker->paragraph(),
             'photo' => 'storage/found-images/placeholder.png',
             'found_date' => $this->faker->dateTimeBetween('-1 year', 'now'),

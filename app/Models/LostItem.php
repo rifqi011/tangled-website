@@ -33,7 +33,7 @@ class LostItem extends Model
         return $this->belongsTo(ClassModel::class, 'class_id');
     }
 
-    public function keyword()
+    public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }

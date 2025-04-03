@@ -66,10 +66,10 @@ class FoundItemController extends Controller
             $photoPath = $request->file('photo')->store('found-images', 'public');
         }
 
-        // Simpan ke database
+        // Simpan ke databas~e
         FoundItem::create([
             'title' => $request->title,
-            'slug' => 'found-items/' . Str::slug($request->title) . '-' . time(),
+            'slug' => Str::slug($request->title) . '-' . time(),
             'found_location' => $request->found_location,
             'found_date' => $request->found_date,
             'description' => $request->description,
@@ -78,5 +78,15 @@ class FoundItemController extends Controller
         ]);
 
         return redirect()->route('home')->with('success', 'Laporan berhasil dikirim!');
+    }
+
+    // show item
+    public function show($slug)
+    {
+        $foundItem = FoundItem::with('category')
+            ->where('slug', $slug)
+            ->where('status', '!=', 'diproses')
+            ->firstOrFail();
+        return view('found-items.show', compact('foundItem'));
     }
 }
