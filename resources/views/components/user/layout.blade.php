@@ -15,15 +15,15 @@
 </head>
 
 <body>
-    <x-header></x-header>
+    <x-user.header></x-user.header>
 
-    <x-navbar></x-navbar>
+    <x-user.navbar></x-user.navbar>
 
     <main class="mx-auto w-[90%]">
         {{ $slot }}
     </main>
 
-    <x-footer></x-footer>
+    <x-user.footer></x-user.footer>
 </body>
 
 </html>

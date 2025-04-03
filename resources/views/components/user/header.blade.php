@@ -16,6 +16,6 @@
             <img src="{{ asset('images/logo-text.svg') }}" alt="">
         </a>
 
-        <x-button href="/login">Login</x-button>
+        <x-user.button href="/login">Login</x-user.button>
     </div>
 </header>

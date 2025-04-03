@@ -1,4 +1,4 @@
-<x-layout>
+<x-user.layout>
     <div class="mb-8 flex flex-col gap-6">
         <div class="flex gap-3 items-center">
             <a href="/home">
@@ -34,4 +34,4 @@
     </div>
 
     {{ $foundItems->links('vendor.pagination.tailwind') }}
-</x-layout>
+</x-user.layout>

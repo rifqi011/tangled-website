@@ -2,7 +2,7 @@
     $swiperImages = ['/images/swiper-images/1.png', '/images/swiper-images/2.png', '/images/swiper-images/3.png'];
 @endphp
 
-<x-layout>
+<x-user.layout>
     <div class="relative">
         {{-- Swiper --}}
         <div class="swiper relative overflow-visible">
@@ -42,7 +42,7 @@
                     </a>
                 @endforeach
 
-                <x-button href="found-items" class="mt-6">Lihat lebih banyak</x-button>
+                <x-user.button href="found-items" class="mt-6">Lihat lebih banyak</x-user.button>
             @else
                 <div class="flex flex-col items-center gap-8">
                     <img src="{{ asset('images/error.png') }}" class="w-2/3" loading="lazy" alt="error picture">
@@ -51,4 +51,4 @@
             @endif
         </div>
     </div>
-</x-layout>
+</x-user.layout>

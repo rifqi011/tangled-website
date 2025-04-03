@@ -1,4 +1,4 @@
-<x-layout>
+<x-user.layout>
     <div class="mb-8 flex flex-col gap-6">
         <h1 class="text-2xl font-bold">Buat Laporan Penemuan</h1>
 
@@ -50,9 +50,9 @@
                     <label class="text-lg font-semibold">Kategori</label>
                     <div class="flex flex-wrap gap-2">
                         @foreach ($categories as $category)
-                            <x-button type="button" class="select-category-btn {{ old('category_id') == $category->id ? '!bg-purple !text-white' : '' }} border border-gray-500 !bg-gray-100 text-sm !text-black !transition-all hover:bg-gray-200 focus:outline-none" data-id="{{ $category->id }}">
+                            <x-user.button type="button" class="select-category-btn {{ old('category_id') == $category->id ? '!bg-purple !text-white' : '' }} border border-gray-500 !bg-gray-100 text-sm !text-black !transition-all hover:bg-gray-200 focus:outline-none" data-id="{{ $category->id }}">
                                 {{ $category->name }}
-                            </x-button>
+                            </x-user.button>
                         @endforeach
                     </div>
                     <input type="hidden" name="category_id" id="category_id" value="{{ old('category_id') }}" required>
@@ -77,8 +77,8 @@
 
                 <hr class="my-4 bg-black">
 
-                <x-button type="submit">Buat Laporan</x-button>
+                <x-user.button type="submit">Buat Laporan</x-user.button>
             </form>
         </div>
     </div>
-</x-layout>
+</x-user.layout>
