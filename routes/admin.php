@@ -12,3 +12,7 @@ Route::get('/admin/dashboard', function () {
 Route::get('/admin/settings', function () {
     return view('admin.dashboard');
 });
+
+Route::get('/login', function () {
+    return view('admin.auth.login');
+});
