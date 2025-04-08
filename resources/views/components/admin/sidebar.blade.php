@@ -49,8 +49,19 @@
         <img src="{{ asset('images/icons/hamburger.svg') }}" class="w-8" alt="">
     </div>
 
-    <div id="user-button" class="w-10">
-        <img src="{{ asset('images/man.svg') }}" alt="">
+    <div class="relative">
+        <div id="user-button" class="w-10">
+            <img src="{{ asset('images/man.svg') }}" alt="">
+        </div>
+
+        <div id="user-dropdown" class="z-50 fixed right-[5%] top-16 flex min-w-48 translate-x-[120%] flex-col gap-2 rounded-lg bg-white px-4 py-2 shadow-lg transition-all duration-200 xl:hidden">
+            <h3 class="text-xl font-semibold">Admin</h3>
+            <hr class="bg-black">
+            <ul class="flex flex-col gap-2 text-lg font-medium text-gray-900">
+                <a href="#">Profile</a>
+                <a href="#" class="text-red">Log out</a>
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -91,14 +102,14 @@
 
         <div class="fixed bottom-0 left-0 hidden w-full flex-1 px-3 xl:flex xl:items-end">
             <div class="flex w-full items-center justify-between rounded-lg bg-gray-200 p-2">
-                <div class="flex gap-3 items-center">
+                <a href="#" class="flex items-center gap-3">
                     <img src="{{ asset('images/man.svg') }}" class="w-10" alt="">
 
                     <div class="">
                         <h3 class="font-semibold">Admin</h3>
                         <p class="text-xs">admin@gmail.com</p>
                     </div>
-                </div>
+                </a>
 
                 <a href="">
                     <img src="{{ asset('images/icons/logout.svg') }}" class="w-8" alt="">
