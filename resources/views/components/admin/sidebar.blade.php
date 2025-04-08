@@ -65,15 +65,15 @@
     </div>
 </div>
 
-<aside id="sidebar" class="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full border-r border-gray-200 bg-white transition-transform sm:sticky sm:translate-x-0 xl:h-[calc(100vh-2.5rem)]" aria-label="Sidebar">
-    <div class="relative flex h-full flex-col overflow-y-auto px-3 py-4 xl:gap-4 xl:py-10">
+<aside id="sidebar" class="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full border-r border-gray-200 bg-white transition-transform sm:sticky sm:translate-x-0 md:h-[calc(100vh-2.5rem)]" aria-label="Sidebar">
+    <div class="relative flex h-full flex-col overflow-y-auto px-3 py-4 md:gap-4 md:py-10">
         <div class="mb-5 flex items-center justify-between">
             <a href="{{ url('/admin') }}" class="flex items-center ps-2.5">
                 <img src="{{ asset('images/logo-icon-primary.svg') }}" class="me-3 h-7" alt="Tangled Logo" />
                 <span class="self-center whitespace-nowrap text-2xl font-semibold sm:text-xl">Tangled</span>
             </a>
 
-            <div id="close-sidebar" class="group flex h-full cursor-pointer flex-col items-center gap-2 xl:hidden">
+            <div id="close-sidebar" class="group flex h-full cursor-pointer flex-col items-center gap-2 sm:hidden">
                 <img src="{{ asset('images/icons/x.svg') }}" class="w-8" alt="">
             </div>
         </div>
@@ -100,7 +100,7 @@
             @endforeach
         </div>
 
-        <div class="fixed bottom-0 left-0 hidden w-full flex-1 px-3 xl:flex xl:items-end">
+        <div class="fixed bottom-0 left-0 hidden w-full flex-1 px-3 md:flex md:items-end">
             <div class="flex w-full items-center justify-between rounded-lg bg-gray-200 p-2">
                 <a href="#" class="flex items-center gap-3">
                     <img src="{{ asset('images/man.svg') }}" class="w-10" alt="">

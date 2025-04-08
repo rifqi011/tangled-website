@@ -18,7 +18,7 @@
     <div class="flex">
         <x-admin.sidebar></x-admin.sidebar>
 
-        <div class="bg-gray-100 flex-1 overflow-auto mt-[72px] px-[5%] xl:px-10 xl:py-10 xl:mt-0">
+        <div class="bg-gray-100 flex-1 overflow-auto mt-[72px] px-[5%] md:px-10 md:py-10 md:mt-0">
             {{ $slot }}
         </div>
     </div>
