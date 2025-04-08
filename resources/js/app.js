@@ -3,6 +3,7 @@ import Swiper from "swiper";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import Swal from "sweetalert2";
 
 document.addEventListener("DOMContentLoaded", function () {
     const swiperElement = document.querySelector(".swiper");
@@ -63,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 uploadLabel.textContent = "Gambar Terunggah";
                 uploadLabel.classList.add("bg-purple");
                 uploadLabel.classList.remove("bg-black");
-                
+
                 if (this.files && this.files.length > 0) {
                     fileChosen.textContent = this.files[0].name;
                 } else {
@@ -150,3 +151,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+// SweetAlert2
+window.Swal = Swal;
