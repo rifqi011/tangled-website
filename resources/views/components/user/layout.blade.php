@@ -24,6 +24,36 @@
     </main>
 
     <x-user.footer></x-user.footer>
+
+    {{-- Alert --}}
+    @if (session('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: '{{ session('success') }}',
+                    footer: 'Silahkan tunggu konfirmasi dari admin',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false,
+                });
+            });
+        </script>
+    @endif
+
+    @if(session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: 'Gagal!',
+                    text: '{{ session('error') }}',
+                    icon: 'error',
+                    timer: 2000,
+                    showConfirmButton: false,
+                });
+            });
+        </script>
+    @endif
 </body>
 
 </html>
