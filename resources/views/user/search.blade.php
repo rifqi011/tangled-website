@@ -35,18 +35,18 @@
     </div>
 
     {{-- List barang --}}
-    <div class="mb-8 flex flex-col gap-3">
+    <div class="mb-8 flex flex-col gap-5">
         @if ($items->count() > 0)
             @foreach ($items as $item)
                 <a href="{{ route($item->type . '-items.show', $item->slug ?? '#') }}" class="group flex gap-2 rounded-3xl bg-white shadow-card">
-                    <img src="{{ asset($item->photo) }}" class="min-h-[180px] w-[35%] overflow-hidden rounded-l-3xl bg-gray-200 bg-center object-cover" loading="lazy" alt="{{ $item->title }}">
+                    <img src="{{ asset($item->photo) }}" class="h-[150px] w-[35%] overflow-hidden rounded-l-3xl bg-gray-200 bg-center object-cover" loading="lazy" alt="{{ $item->title }}">
 
-                    <div class="flex h-full w-2/3 flex-col justify-start gap-3 p-2 pl-0">
-                        <p class="{{ $item->status === 'disimpan' ? 'bg-red' : ($item->status === 'hilang' ? 'bg-purple' : 'bg-green') }} self-start rounded-3xl px-5 text-lg capitalize text-white">
+                    <div class="flex h-full w-2/3 flex-col justify-start p-2 pl-0">
+                        <p class="{{ $item->status === 'disimpan' ? 'bg-red' : ($item->status === 'hilang' ? 'bg-purple' : 'bg-green') }} self-start rounded-3xl px-5 text-md capitalize text-white">
                             {{ $item->status }}
                         </p>
 
-                        <h3 class="text-2xl font-semibold">{{ Str::limit($item->title, 25) }}</h3>
+                        <h3 class="text-2xl font-semibold mt-2">{{ Str::limit($item->title, 25) }}</h3>
 
                         @if ($item->type === 'found')
                             <p>Ditemukan di <strong>{{ $item->location }}</strong> pada {{ \Carbon\Carbon::parse($item->date)->locale('id')->translatedFormat('d F Y') }}</p>
