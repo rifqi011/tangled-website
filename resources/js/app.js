@@ -114,13 +114,13 @@ if (filterButton) {
         filterModal.classList.toggle("-translate-y-[160%]");
 
         topBar.classList.toggle("rotate-45");
-        topBar.classList.toggle("translate-y-3");
+        topBar.classList.toggle("translate-y-[10px]");
         topBar.classList.toggle("!w-10");
 
         middleBar.classList.toggle("opacity-0");
 
         bottomBar.classList.toggle("-rotate-45");
-        bottomBar.classList.toggle("-translate-y-3");
+        bottomBar.classList.toggle("-translate-y-[10px]");
         bottomBar.classList.toggle("!w-10");
     });
 }
@@ -154,3 +154,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // SweetAlert2
 window.Swal = Swal;
+
+// search icon for submit
+document.addEventListener("DOMContentLoaded", function () {
+    const searchIcon = document.getElementById("search-icon");
+    const form = document.querySelector("form");
+    const searchInput = document.getElementById("search");
+
+    if (searchIcon && searchInput) {
+        if (searchInput.value) {
+            searchIcon.addEventListener("click", function () {
+                form.submit();
+            });
+        }
+    }
+});
