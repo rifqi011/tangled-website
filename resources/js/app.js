@@ -114,13 +114,13 @@ if (filterButton) {
         filterModal.classList.toggle("-translate-y-[160%]");
 
         topBar.classList.toggle("rotate-45");
-        topBar.classList.toggle("translate-y-3");
+        topBar.classList.toggle("translate-y-[10px]");
         topBar.classList.toggle("!w-10");
 
         middleBar.classList.toggle("opacity-0");
 
         bottomBar.classList.toggle("-rotate-45");
-        bottomBar.classList.toggle("-translate-y-3");
+        bottomBar.classList.toggle("-translate-y-[10px]");
         bottomBar.classList.toggle("!w-10");
     });
 }

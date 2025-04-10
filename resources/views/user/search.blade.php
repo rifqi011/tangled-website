@@ -4,28 +4,28 @@
             <form method="GET" action="{{ route('search.index') }}" class="flex w-full items-center gap-3 rounded-3xl border-2 border-black px-3 py-1">
                 <img src="{{ asset('images/icons/search.svg') }}" alt="icon" class="w-6">
 
-                <input type="search" name="query" id="search" value="{{ request('query') }}" class="w-full text-xl placeholder-black outline-none" autocomplete="off" autofocus placeholder="Nyari sesuatu?">
+                <input type="search" name="query" id="search" value="{{ request('query') }}" class="w-full py-1 text-base placeholder-black outline-none" autocomplete="off" autofocus placeholder="Nyari sesuatu?">
 
                 <input type="hidden" name="category" id="category_id" value="{{ request('category', 'Semua') }}">
             </form>
 
             <div id="filter-button" class="group flex h-full cursor-pointer flex-col items-center gap-2">
-                <span id="top-bar" class="h-1 w-10 bg-black transition-all duration-200"></span>
-                <span id="middle-bar" class="h-1 w-7 bg-black transition-all duration-200"></span>
-                <span id="bottom-bar" class="h-1 w-4 bg-black transition-all duration-200"></span>
+                <span id="top-bar" class="h-[2px] w-10 bg-black transition-all duration-200"></span>
+                <span id="middle-bar" class="h-[2px] w-7 bg-black transition-all duration-200"></span>
+                <span id="bottom-bar" class="h-[2px] w-4 bg-black transition-all duration-200"></span>
             </div>
         </div>
 
         <div id="filter-modal" class="absolute -translate-y-[160%] rounded-3xl bg-white p-3 pb-4 shadow-card transition-all duration-300 ease-out">
             <div class="w-full space-y-3">
-                <h3 class="text-xl">Kata kunci:</h3>
+                <h3 class="text-lg">Kata kunci:</h3>
                 <div class="flex flex-wrap gap-2">
-                    <button type="button" class="category-btn py-1/2 {{ request('category', 'Semua') === 'Semua' ? '!bg-purple !text-white' : '!bg-gray-100 !text-black' }} rounded-3xl border border-gray-500 px-3 text-xl !transition-all hover:bg-gray-200 focus:outline-none" data-id="Semua">
+                    <button type="button" class="category-btn py-1/2 {{ request('category', 'Semua') === 'Semua' ? '!bg-purple !text-white' : '!bg-gray-100 !text-black' }} rounded-3xl border border-gray-500 px-3 text-lg !transition-all hover:bg-gray-200 focus:outline-none" data-id="Semua">
                         Semua
                     </button>
 
                     @foreach ($categories as $category)
-                        <button type="button" class="category-btn py-1/2 {{ request('category') === $category->name ? '!bg-purple !text-white' : '!bg-gray-100 !text-black' }} rounded-3xl border border-gray-500 px-3 text-xl !transition-all hover:bg-gray-200 focus:outline-none" data-id="{{ $category->name }}">
+                        <button type="button" class="category-btn py-1/2 {{ request('category') === $category->name ? '!bg-purple !text-white' : '!bg-gray-100 !text-black' }} rounded-3xl border border-gray-500 px-3 text-lg !transition-all hover:bg-gray-200 focus:outline-none" data-id="{{ $category->name }}">
                             {{ $category->name }}
                         </button>
                     @endforeach
@@ -42,11 +42,11 @@
                     <img src="{{ asset($item->photo) }}" class="h-[150px] w-[35%] overflow-hidden rounded-l-3xl bg-gray-200 bg-center object-cover" loading="lazy" alt="{{ $item->title }}">
 
                     <div class="flex h-full w-2/3 flex-col justify-start p-2 pl-0">
-                        <p class="{{ $item->status === 'disimpan' ? 'bg-red' : ($item->status === 'hilang' ? 'bg-purple' : 'bg-green') }} self-start rounded-3xl px-5 text-md capitalize text-white">
+                        <p class="{{ $item->status === 'disimpan' ? 'bg-red' : ($item->status === 'hilang' ? 'bg-purple' : 'bg-green') }} text-md self-start rounded-3xl px-5 capitalize text-white">
                             {{ $item->status }}
                         </p>
 
-                        <h3 class="text-2xl font-semibold mt-2">{{ Str::limit($item->title, 25) }}</h3>
+                        <h3 class="mt-2 text-2xl font-semibold">{{ Str::limit($item->title, 25) }}</h3>
 
                         @if ($item->type === 'found')
                             <p>Ditemukan di <strong>{{ $item->location }}</strong> pada {{ \Carbon\Carbon::parse($item->date)->locale('id')->translatedFormat('d F Y') }}</p>
