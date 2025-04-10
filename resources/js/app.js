@@ -154,3 +154,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // SweetAlert2
 window.Swal = Swal;
+
+// search icon for submit
+document.addEventListener("DOMContentLoaded", function () {
+    const searchIcon = document.getElementById("search-icon");
+    const form = document.querySelector("form");
+    const searchInput = document.getElementById("search");
+
+    if (searchIcon && searchInput) {
+        if (searchInput.value) {
+            searchIcon.addEventListener("click", function () {
+                form.submit();
+            });
+        }
+    }
+});
