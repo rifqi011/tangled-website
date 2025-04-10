@@ -22,7 +22,7 @@
     </div>
 
     <div class="mb-8 mt-6 flex flex-col gap-6">
-        <h1 class="text-2xl font-bold">Barang Disimpan Kesiswaan</h1>
+        <h1 class="text-2xl font-bold">Barang Disimpan</h1>
 
         <div class="flex flex-col gap-3">
             @if ($foundItems->isNotEmpty())
