@@ -46,7 +46,7 @@
             @else
                 <div class="flex flex-col items-center gap-8">
                     <img src="{{ asset('images/error.png') }}" class="w-2/3" loading="lazy" alt="error picture">
-                    <h1 class="text-center text-3xl font-bold">Tidak ada barang untuk ditampilkan</h1>
+                    <h1 class="mx-auto w-[80%] text-center text-2xl font-bold">Tidak ada barang untuk ditampilkan</h1>
                 </div>
             @endif
         </div>

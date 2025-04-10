@@ -60,7 +60,7 @@
             <div class="py-10 text-center text-xl">
                 <img src="{{ asset('images/search-not-found.png') }}" alt="">
 
-                <p class="text-2xl font-semibold">Coba gunakan kata kunci lainnya atau buat laporan kehilangan</p>
+                <p class="text-xl font-semibold">Coba gunakan kata kunci lainnya atau buat laporan kehilangan</p>
 
                 <x-user.button href="lost" class="mt-6">Buat laporan</x-user.button>
             </div>
