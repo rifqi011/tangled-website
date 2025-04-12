@@ -1,20 +1,33 @@
 import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
+import { loadEnv } from "vite";
 
-export default defineConfig({
-    server: {
-        host: "192.168.40.170", // pakai IP LAN dari komputermu, bukan `true`
-        port: 5173,
-        strictPort: true,
-        cors: {
-            origin: "http://192.168.40.170:8000", // Allow dari Laravel
-            credentials: true,
+export default defineConfig(({ mode }) => {
+    // Load env file based on mode
+    const env = loadEnv(mode, process.cwd());
+
+    // Get host IP from env or use default
+    const host = env.VITE_HOST || "localhost";
+    const port = parseInt(env.VITE_PORT || "5173");
+
+    // Construct proper origin for CORS
+    const appOrigin = `http://${host}:8000`;
+
+    return {
+        server: {
+            host,
+            port,
+            strictPort: true,
+            cors: {
+                origin: appOrigin,
+                credentials: true,
+            },
         },
-    },
-    plugins: [
-        laravel({
-            input: ["resources/css/app.css", "resources/js/app.js"],
-            refresh: true,
-        }),
-    ],
+        plugins: [
+            laravel({
+                input: ["resources/css/app.css", "resources/js/app.js"],
+                refresh: true,
+            }),
+        ],
+    };
 });
