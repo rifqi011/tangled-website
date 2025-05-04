@@ -6,7 +6,14 @@
 @tailwind utilities;
 
 body {
-    font-family: "Urbanist", sans-serif;
+    font-family: "Urbanist", sans-serif !important;
+}
+
+input,
+textarea,
+select,
+button {
+    outline: none;
 }
 
 /* Swiper */

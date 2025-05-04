@@ -6,13 +6,13 @@
                     {!! __('pagination.previous') !!}
                 </span>
             @else
-                <a href="{{ $paginator->previousPageUrl() }}" class="bg-purple hover:bg-indigo-700 relative inline-flex items-center rounded-3xl border border-gray-300 px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out">
+                <a href="{{ $paginator->previousPageUrl() }}" class="relative inline-flex items-center rounded-3xl border border-gray-300 bg-purple px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out hover:bg-purple">
                     {!! __('pagination.previous') !!}
                 </a>
             @endif
 
             @if ($paginator->hasMorePages())
-                <a href="{{ $paginator->nextPageUrl() }}" class="bg-purple hover:bg-indigo-700 relative ml-3 inline-flex items-center rounded-3xl border border-gray-300 px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out">
+                <a href="{{ $paginator->nextPageUrl() }}" class="relative ml-3 inline-flex items-center rounded-3xl border border-gray-300 bg-purple px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out hover:bg-purple">
                     {!! __('pagination.next') !!}
                 </a>
             @else
@@ -47,7 +47,7 @@
                             ←
                         </span>
                     @else
-                        <a href="{{ $paginator->previousPageUrl() }}" class="bg-purple hover:bg-indigo-700 relative inline-flex items-center rounded-l-3xl border border-gray-300 px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out">
+                        <a href="{{ $paginator->previousPageUrl() }}" class="relative inline-flex items-center rounded-l-3xl border border-gray-300 bg-purple px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out hover:bg-purple">
                             ←
                         </a>
                     @endif
@@ -61,11 +61,11 @@
                         @if (is_array($element))
                             @foreach ($element as $page => $url)
                                 @if ($page == $paginator->currentPage())
-                                    <span class="bg-purple relative -ml-px inline-flex cursor-default items-center border border-gray-300 px-4 py-2 text-sm font-medium leading-5 text-white">
+                                    <span class="relative -ml-px inline-flex cursor-default items-center border border-gray-300 bg-purple px-4 py-2 text-sm font-medium leading-5 text-white">
                                         {{ $page }}
                                     </span>
                                 @else
-                                    <a href="{{ $url }}" class="hover:bg-purple relative -ml-px inline-flex items-center border border-gray-300 bg-gray-200 px-4 py-2 text-sm font-medium leading-5 text-black transition duration-150 ease-in-out hover:text-white">
+                                    <a href="{{ $url }}" class="relative -ml-px inline-flex items-center border border-gray-300 bg-gray-200 px-4 py-2 text-sm font-medium leading-5 text-black transition duration-150 ease-in-out hover:bg-purple hover:text-white">
                                         {{ $page }}
                                     </a>
                                 @endif
@@ -75,7 +75,7 @@
 
                     {{-- Next Page --}}
                     @if ($paginator->hasMorePages())
-                        <a href="{{ $paginator->nextPageUrl() }}" class="bg-purple hover:bg-indigo-700 relative -ml-px inline-flex items-center rounded-r-3xl border border-gray-300 px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out">
+                        <a href="{{ $paginator->nextPageUrl() }}" class="relative -ml-px inline-flex items-center rounded-r-3xl border border-gray-300 bg-purple px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out hover:bg-purple">
                             →
                         </a>
                     @else
