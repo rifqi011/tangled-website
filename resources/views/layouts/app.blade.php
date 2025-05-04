@@ -13,6 +13,20 @@
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/admin.js'])
     @endif
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .swal2-confirm {
+            background-color: #dc2626 !important;
+            padding: 8px 16px;
+        }
+
+        .swal2-cancel {
+            background-color: #6b7280 !important;
+            padding: 8px 16px;
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased">

@@ -21,7 +21,7 @@
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             @if (session('success'))
-                <div class="bg-green text-white relative mb-4 rounded border px-4 py-3" role="alert">
+                <div class="relative mb-4 rounded border bg-green px-4 py-3 text-white" role="alert">
                     <span class="block sm:inline">{{ session('success') }}</span>
                 </div>
             @endif
@@ -69,10 +69,10 @@
                                                 {{-- @endcan --}}
 
                                                 {{-- @can('delete', $admin) --}}
-                                                <form action="{{ route('admins.destroy', $admin) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this admin?');">
+                                                <form id="delete-form-{{ $admin->id }}" action="{{ route('admins.destroy', $admin) }}" method="POST" class="inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="text-red hover:underline">
+                                                    <button type="button" class="text-red hover:underline" onclick="confirmDelete({{ $admin->id }})">
                                                         Delete
                                                     </button>
                                                 </form>
@@ -95,4 +95,22 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function confirmDelete(adminId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc2626',
+                cancelButtonColor: '#6b7280',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + adminId).submit();
+                }
+            })
+        }
+    </script>
 </x-app-layout>
