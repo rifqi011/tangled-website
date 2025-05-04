@@ -10,9 +10,9 @@
             </h2>
             @if (auth()->user()->isSuperAdmin())
                 <a href="{{ route('admins.create') }}"">
-                    <x-secondary-button>
+                    <x-admin.secondary-button>
                         Create Admin
-                    </x-secondary-button>
+                    </x-admin.secondary-button>
                 </a>
             @endif
         </div>
@@ -90,7 +90,6 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>
