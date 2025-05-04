@@ -33,7 +33,7 @@
                     <p class="mt-2 text-sm text-gray-800">
                         {{ __('Your email address is unverified.') }}
 
-                        <button form="send-verification" class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple/70 focus:ring-offset-2">
+                        <button form="send-verification" class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple focus:ring-offset-2">
                             {{ __('Click here to re-send the verification email.') }}
                         </button>
                     </p>
