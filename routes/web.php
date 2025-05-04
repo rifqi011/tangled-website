@@ -6,7 +6,7 @@ use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\SearchController;
 use App\Http\Controllers\User\LostItemController;
 use App\Http\Controllers\User\FoundItemController;
-use App\Http\Controllers\Admin\SuperAdminController;
+use App\Http\Controllers\Admin\AdminController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -39,7 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::middleware('superadmin')->group(function () {
         // Route untuk mengelola admin
-        Route::resource('admins', SuperAdminController::class);
+        Route::resource('admins', AdminController::class);
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

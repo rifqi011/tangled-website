@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
-class SuperAdminController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class SuperAdminController extends Controller
     public function index()
     {
         $admins = User::where('role', 'admin')->get();
-        return view('superadmin.index', compact('admins'));
+        return view('superadmin.admins.index', compact('admins'));
     }
 
     /**
@@ -24,7 +24,7 @@ class SuperAdminController extends Controller
      */
     public function create()
     {
-        return view('admin.superadmin.admins.create');
+        return view('superadmin.admins.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class SuperAdminController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required',Rules\Password::defaults()],
         ]);
 
         $user = User::create([
@@ -54,7 +54,7 @@ class SuperAdminController extends Controller
      */
     public function show(User $admin)
     {
-        return view('admin.superadmin.admins.show', compact('admin'));
+        return view('superadmin.admins.show', compact('admin'));
     }
 
     /**
@@ -62,7 +62,7 @@ class SuperAdminController extends Controller
      */
     public function edit(User $admin)
     {
-        return view('admin.superadmin.admins.edit', compact('admin'));
+        return view('superadmin.admins.edit', compact('admin'));
     }
 
     /**
