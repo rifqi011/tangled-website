@@ -20,7 +20,7 @@
                     @if (auth()->user()->isSuperAdmin())
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                             <x-nav-link :href="route('admins.index')" :active="request()->routeIs('admins.index')">
-                                {{ __('Kelola Admin') }}
+                                {{ __('Admin Management') }}
                             </x-nav-link>
                         </div>
                     @endif
@@ -80,7 +80,7 @@
             </x-responsive-nav-link>
             @if (auth()->user()->isSuperAdmin())
                 <x-responsive-nav-link :href="route('admins.index')" :active="request()->routeIs('admins.index')">
-                    {{ __('Kelola Admin') }}
+                    {{ __('Admin Management') }}
                 </x-responsive-nav-link>
             @endif
         </div>
