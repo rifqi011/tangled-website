@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\SearchController;
 use App\Http\Controllers\User\LostItemController;
 use App\Http\Controllers\User\FoundItemController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 
 
