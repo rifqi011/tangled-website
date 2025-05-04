@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\User\FoundItemController;
-use App\Http\Controllers\User\HomeController;
-use App\Http\Controllers\User\LostItemController;
-use App\Http\Controllers\User\SearchController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\SearchController;
+use App\Http\Controllers\User\LostItemController;
+use App\Http\Controllers\User\FoundItemController;
+use App\Http\Controllers\Admin\SuperAdminController;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::redirect('/home', '/', 301);
@@ -28,5 +31,20 @@ Route::post('/lost/store', [LostItemController::class, 'store'])->name('lost-ite
 // Search page
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 
-// Admin
-require __DIR__.'/admin.php';
+// Dashboard page with auth
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::middleware('superadmin')->group(function () {
+        // Route untuk mengelola admin
+        Route::resource('admins', SuperAdminController::class);
+    });
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';

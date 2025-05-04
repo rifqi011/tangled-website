@@ -4,6 +4,11 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Swal from "sweetalert2";
+import Alpine from "alpinejs";
+
+window.Alpine = Alpine;
+
+Alpine.start();
 
 document.addEventListener("DOMContentLoaded", function () {
     const swiperElement = document.querySelector(".swiper");
