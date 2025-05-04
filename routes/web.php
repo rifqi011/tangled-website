@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\FoundItemController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\LostItemController;
 use App\Http\Controllers\User\SearchController;
-use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::redirect('/home', '/', 301);
@@ -27,3 +29,16 @@ Route::post('/lost/store', [LostItemController::class, 'store'])->name('lost-ite
 
 // Search page
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
+
+// Dashboard page with auth
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
