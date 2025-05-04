@@ -27,6 +27,3 @@ Route::post('/lost/store', [LostItemController::class, 'store'])->name('lost-ite
 
 // Search page
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
-
-// Admin
-require __DIR__.'/admin.php';
