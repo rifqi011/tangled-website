@@ -34,7 +34,7 @@ Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 // Dashboard page with auth
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('admin.dashboard');
     })->name('dashboard');
 
     Route::middleware('superadmin')->group(function () {

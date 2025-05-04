@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin.app-layout>
     <x-slot name="title">
         {{ __('Admin Management') }}
     </x-slot>
@@ -113,4 +113,4 @@
             })
         }
     </script>
-</x-app-layout>
+</x-admin.app-layout>

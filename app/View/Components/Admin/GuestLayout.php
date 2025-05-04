@@ -1,9 +1,10 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Admin;
 
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use Illuminate\View\View;
 
 class GuestLayout extends Component
 {
@@ -12,6 +13,6 @@ class GuestLayout extends Component
      */
     public function render(): View
     {
-        return view('layouts.guest');
+        return view('admin.layouts.guest');
     }
 }

@@ -16,7 +16,7 @@ class AdminController extends Controller
     public function index()
     {
         $admins = User::where('role', 'admin')->get();
-        return view('superadmin.admins.index', compact('admins'));
+        return view('admin.superadmin.admins.index', compact('admins'));
     }
 
     /**
@@ -24,7 +24,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('superadmin.admins.create');
+        return view('admin.superadmin.admins.create');
     }
 
     /**
@@ -54,7 +54,7 @@ class AdminController extends Controller
      */
     public function show(User $admin)
     {
-        return view('superadmin.admins.show', compact('admin'));
+        return view('admin.superadmin.admins.show', compact('admin'));
     }
 
     /**
@@ -62,7 +62,7 @@ class AdminController extends Controller
      */
     public function edit(User $admin)
     {
-        return view('superadmin.admins.edit', compact('admin'));
+        return view('admin.superadmin.admins.edit', compact('admin'));
     }
 
     /**
