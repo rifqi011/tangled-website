@@ -16,6 +16,10 @@
             <img src="{{ asset('images/logo-text.svg') }}" alt="">
         </a>
 
-        <x-user.button href="/login">Login</x-user.button>
+        @if (auth()->user())
+            <x-user.button href="/dashboard">Dashboard</x-user.button>
+        @else
+            <x-user.button href="/login">Login</x-user.button>
+        @endif
     </div>
 </header>
