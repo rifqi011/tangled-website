@@ -127,6 +127,9 @@
                                             Status
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                            Total Reports
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                                             Actions
                                         </th>
                                     </tr>
@@ -141,6 +144,9 @@
                                                 <span class="{{ $category->status ? 'bg-green text-white' : 'bg-red text-white' }} inline-flex rounded-full px-2 text-xs font-semibold leading-5">
                                                     {{ $category->status ? 'Active' : 'Inactive' }}
                                                 </span>
+                                            </td>
+                                            <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                                                {{ $category->report_count }}
                                             </td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
                                                 <div class="flex space-x-2">
@@ -159,7 +165,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="3" class="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-500">
+                                            <td colspan="4" class="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-500">
                                                 No categories found.
                                             </td>
                                         </tr>
@@ -443,4 +449,4 @@
             });
         }
     </script>
-</x-admin.app-layout>,
+</x-admin.app-layout>
