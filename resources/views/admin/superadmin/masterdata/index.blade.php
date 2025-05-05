@@ -14,7 +14,7 @@
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             @if (session('success'))
-                <div class="bg-green relative mb-4 rounded border px-4 py-3 text-white" role="alert">
+                <div class="relative mb-4 rounded border bg-green px-4 py-3 text-white" role="alert">
                     <span class="block sm:inline">{{ session('success') }}</span>
                 </div>
             @endif
@@ -111,7 +111,7 @@
                     @elseif ($tab === 'categories')
                         <div class="mb-6 flex items-center justify-between">
                             <h3 class="text-lg font-medium">Category Management</h3>
-                            <button type="button" class="bg-purple hover:bg-purple rounded-md px-4 py-2 text-white" onclick="toggleCategoryModal()">
+                            <button type="button" class="hover:bg-purple-700 rounded-md bg-purple px-4 py-2 text-white" onclick="toggleCategoryModal()">
                                 Create Category
                             </button>
                         </div>
@@ -138,13 +138,13 @@
                                                 {{ $category->name }}
                                             </td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                                <span class="{{ $category->status ? 'bg-green-100 text-green-800' : 'bg-red text-red' }} inline-flex rounded-full px-2 text-xs font-semibold leading-5">
+                                                <span class="{{ $category->status ? 'bg-green text-white' : 'bg-red text-white' }} inline-flex rounded-full px-2 text-xs font-semibold leading-5">
                                                     {{ $category->status ? 'Active' : 'Inactive' }}
                                                 </span>
                                             </td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
                                                 <div class="flex space-x-2">
-                                                    <button type="button" class="text-purple hover:underline" onclick="editCategory({{ $category->id }}, '{{ $category->name }}', {{ $category->status }})">
+                                                    <button type="button" class="text-purple hover:underline" onclick="editCategory({{ $category->id }}, '{{ $category->name }}', '{{ $category->status }}')">
                                                         Edit
                                                     </button>
                                                     <form id="delete-category-form-{{ $category->id }}" action="{{ route('masterdata.category.destroy', $category) }}" method="POST" class="inline">
@@ -187,18 +187,18 @@
                                     </div>
                                     <div class="mb-4">
                                         <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                                        <input type="text" name="name" id="categoryName" class="focus:border-purple focus:ring-purple mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+                                        <input type="text" name="name" id="categoryName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple focus:ring-purple" required>
                                     </div>
                                     <div class="mb-4">
                                         <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                                        <select name="status" id="categoryStatus" class="focus:border-purple focus:ring-purple mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                        <select name="status" id="categoryStatus" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple focus:ring-purple">
                                             <option value="1">Active</option>
                                             <option value="0">Inactive</option>
                                         </select>
                                     </div>
                                     <div class="flex justify-end">
                                         <button type="button" class="mr-2 rounded-md bg-gray-200 px-4 py-2 text-gray-700" onclick="toggleCategoryModal()">Cancel</button>
-                                        <button type="submit" class="bg-purple rounded-md px-4 py-2 text-white">Save</button>
+                                        <button type="submit" class="rounded-md bg-purple px-4 py-2 text-white">Save</button>
                                     </div>
                                 </form>
                             </div>
@@ -206,7 +206,7 @@
                     @elseif ($tab === 'classes')
                         <div class="mb-6 flex items-center justify-between">
                             <h3 class="text-lg font-medium">Class Management</h3>
-                            <button type="button" class="bg-purple hover:bg-purple rounded-md px-4 py-2 text-white" onclick="toggleClassModal()">
+                            <button type="button" class="hover:bg-purple-700 rounded-md bg-purple px-4 py-2 text-white" onclick="toggleClassModal()">
                                 Create Class
                             </button>
                         </div>
@@ -233,13 +233,13 @@
                                                 {{ $class->name }}
                                             </td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                                <span class="{{ $class->status ? 'bg-green-100 text-green-800' : 'bg-red text-red' }} inline-flex rounded-full px-2 text-xs font-semibold leading-5">
+                                                <span class="{{ $class->status ? 'bg-green text-white' : 'bg-red text-white' }} inline-flex rounded-full px-2 text-xs font-semibold leading-5">
                                                     {{ $class->status ? 'Active' : 'Inactive' }}
                                                 </span>
                                             </td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
                                                 <div class="flex space-x-2">
-                                                    <button type="button" class="text-purple hover:underline" onclick="editClass({{ $class->id }}, '{{ $class->name }}', {{ $class->status }})">
+                                                    <button type="button" class="text-purple hover:underline" onclick="editClass({{ $class->id }}, '{{ $class->name }}', '{{ $class->status }}')">
                                                         Edit
                                                     </button>
                                                     <form id="delete-class-form-{{ $class->id }}" action="{{ route('masterdata.class.destroy', $class) }}" method="POST" class="inline">
@@ -282,18 +282,18 @@
                                     </div>
                                     <div class="mb-4">
                                         <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                                        <input type="text" name="name" id="className" class="focus:border-purple focus:ring-purple mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+                                        <input type="text" name="name" id="className" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple focus:ring-purple" required>
                                     </div>
                                     <div class="mb-4">
                                         <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                                        <select name="status" id="classStatus" class="focus:border-purple focus:ring-purple mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                        <select name="status" id="classStatus" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple focus:ring-purple">
                                             <option value="1">Active</option>
                                             <option value="0">Inactive</option>
                                         </select>
                                     </div>
                                     <div class="flex justify-end">
                                         <button type="button" class="mr-2 rounded-md bg-gray-200 px-4 py-2 text-gray-700" onclick="toggleClassModal()">Cancel</button>
-                                        <button type="submit" class="bg-purple rounded-md px-4 py-2 text-white">Save</button>
+                                        <button type="submit" class="rounded-md bg-purple px-4 py-2 text-white">Save</button>
                                     </div>
                                 </form>
                             </div>
@@ -319,35 +319,52 @@
                 if (result.isConfirmed) {
                     document.getElementById('delete-admin-form-' + adminId).submit();
                 }
-            })
+            });
         }
 
         // Category modal functions
         function toggleCategoryModal() {
             const modal = document.getElementById('categoryModal');
-            modal.classList.toggle('hidden');
+            console.log("Toggle Category Modal called");
+            if (modal) {
+                modal.classList.toggle('hidden');
 
-            // Reset form when opening for create
-            if (!modal.classList.contains('hidden')) {
-                document.getElementById('categoryForm').reset();
-                document.getElementById('categoryForm').action = "{{ route('masterdata.category.store') }}";
-                document.getElementById('categoryModalTitle').textContent = 'Create Category';
-                document.getElementById('categoryMethodDiv').innerHTML = '';
+                // Reset form when opening for create
+                if (!modal.classList.contains('hidden')) {
+                    document.getElementById('categoryForm').reset();
+                    document.getElementById('categoryForm').action = "{{ route('masterdata.category.store') }}";
+                    document.getElementById('categoryModalTitle').textContent = 'Create Category';
+                    document.getElementById('categoryMethodDiv').innerHTML = '';
+                }
             }
         }
 
         function editCategory(id, name, status) {
-            // Set form values
-            document.getElementById('categoryName').value = name;
-            document.getElementById('categoryStatus').value = status ? "1" : "0";
+            try {
+                console.log("Edit Category called with:", id, name, status);
 
-            // Change form action and method for update
-            document.getElementById('categoryForm').action = "/masterdata/category/" + id;
-            document.getElementById('categoryMethodDiv').innerHTML = '<input type="hidden" name="_method" value="PUT">';
-            document.getElementById('categoryModalTitle').textContent = 'Edit Category';
+                // Set form values
+                const nameInput = document.getElementById('categoryName');
+                const statusSelect = document.getElementById('categoryStatus');
+                const form = document.getElementById('categoryForm');
+                const methodDiv = document.getElementById('categoryMethodDiv');
+                const modalTitle = document.getElementById('categoryModalTitle');
+                const modal = document.getElementById('categoryModal');
 
-            // Show modal
-            document.getElementById('categoryModal').classList.remove('hidden');
+                if (nameInput) nameInput.value = name;
+                if (statusSelect) statusSelect.value = status ? "1" : "0";
+
+                // Change form action and method for update
+                if (form) form.action = "/masterdata/category/" + id;
+                if (methodDiv) methodDiv.innerHTML = '<input type="hidden" name="_method" value="PUT">';
+                if (modalTitle) modalTitle.textContent = 'Edit Category';
+
+                // Show modal
+                if (modal) modal.classList.remove('hidden');
+            } catch (e) {
+                console.error("Error in editCategory function:", e);
+                alert("Error opening edit modal: " + e.message);
+            }
         }
 
         function confirmDeleteCategory(categoryId) {
@@ -363,51 +380,67 @@
                 if (result.isConfirmed) {
                     document.getElementById('delete-category-form-' + categoryId).submit();
                 }
-            })
+            });
         }
 
         // Class modal functions
         function toggleClassModal() {
             const modal = document.getElementById('classModal');
-            modal.classList.toggle('hidden');
+            if (modal) {
+                modal.classList.toggle('hidden');
 
-            // Reset form when opening for create
-            if (!modal.classList.contains('hidden')) {
-                document.getElementById('classForm').reset();
-                document.getElementById('classForm').action = "{{ route('masterdata.class.store') }}";
-                document.getElementById('classModalTitle').textContent = 'Create Class';
-                document.getElementById('classMethodDiv').innerHTML = '';
+                // Reset form when opening for create
+                if (!modal.classList.contains('hidden')) {
+                    document.getElementById('classForm').reset();
+                    document.getElementById('classForm').action = "{{ route('masterdata.class.store') }}";
+                    document.getElementById('classModalTitle').textContent = 'Create Class';
+                    document.getElementById('classMethodDiv').innerHTML = '';
+                }
             }
         }
 
         function editClass(id, name, status) {
-            // Set form values
-            document.getElementById('className').value = name;
-            document.getElementById('classStatus').value = status ? "1" : "0";
+            try {
+                console.log("Edit Class called with:", id, name, status);
 
-            // Change form action and method for update
-            document.getElementById('classForm').action = "/masterdata/class/" + id;
-            document.getElementById('classMethodDiv').innerHTML = '<input type="hidden" name="_method" value="PUT">';
-            document.getElementById('classModalTitle').textContent = 'Edit Class';
+                // Set form values
+                const nameInput = document.getElementById('className');
+                const statusSelect = document.getElementById('classStatus');
+                const form = document.getElementById('classForm');
+                const methodDiv = document.getElementById('classMethodDiv');
+                const modalTitle = document.getElementById('classModalTitle');
+                const modal = document.getElementById('classModal');
 
-            // Show modal
-            document.getElementById('classModal').classList.remove('hidden');
+                if (nameInput) nameInput.value = name;
+                if (statusSelect) statusSelect.value = status ? "1" : "0";
+
+                // Change form action and method for update
+                if (form) form.action = "/masterdata/class/" + id;
+                if (methodDiv) methodDiv.innerHTML = '<input type="hidden" name="_method" value="PUT">';
+                if (modalTitle) modalTitle.textContent = 'Edit Class';
+
+                // Show modal
+                if (modal) modal.classList.remove('hidden');
+            } catch (e) {
+                console.error("Error in editClass function:", e);
+                alert("Error opening edit modal: " + e.message);
+            }
         }
 
         function confirmDeleteClass(classId) {
             Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#dc2626',
-            cancelButtonColor: '#6b7280',
-            confirmButtonText: 'Yes, delete it!'
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc2626',
+                cancelButtonColor: '#6b7280',
+                confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('delete-class-form-' + classId).submit();
-            }
-            })
+                if (result.isConfirmed) {
+                    document.getElementById('delete-class-form-' + classId).submit();
+                }
+            });
         }
-        </script>
+    </script>
 </x-admin.app-layout>,
