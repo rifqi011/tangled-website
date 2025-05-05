@@ -91,7 +91,7 @@
                                                     <form id="delete-admin-form-{{ $admin->id }}" action="{{ route('masterdata.admin.destroy', $admin) }}" method="POST" class="inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button" class="text-red-600 hover:underline" onclick="confirmDeleteAdmin({{ $admin->id }})">
+                                                        <button type="button" class="text-red hover:underline" onclick="confirmDeleteAdmin({{ $admin->id }})">
                                                             Delete
                                                         </button>
                                                     </form>
@@ -138,7 +138,7 @@
                                                 {{ $category->name }}
                                             </td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                                <span class="{{ $category->status ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }} inline-flex rounded-full px-2 text-xs font-semibold leading-5">
+                                                <span class="{{ $category->status ? 'bg-green-100 text-green-800' : 'bg-red text-red' }} inline-flex rounded-full px-2 text-xs font-semibold leading-5">
                                                     {{ $category->status ? 'Active' : 'Inactive' }}
                                                 </span>
                                             </td>
@@ -150,7 +150,7 @@
                                                     <form id="delete-category-form-{{ $category->id }}" action="{{ route('masterdata.category.destroy', $category) }}" method="POST" class="inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button" class="text-red-600 hover:underline" onclick="confirmDeleteCategory({{ $category->id }})">
+                                                        <button type="button" class="text-red hover:underline" onclick="confirmDeleteCategory({{ $category->id }})">
                                                             Delete
                                                         </button>
                                                     </form>
@@ -233,7 +233,7 @@
                                                 {{ $class->name }}
                                             </td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                                <span class="{{ $class->status ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }} inline-flex rounded-full px-2 text-xs font-semibold leading-5">
+                                                <span class="{{ $class->status ? 'bg-green-100 text-green-800' : 'bg-red text-red' }} inline-flex rounded-full px-2 text-xs font-semibold leading-5">
                                                     {{ $class->status ? 'Active' : 'Inactive' }}
                                                 </span>
                                             </td>
@@ -245,7 +245,7 @@
                                                     <form id="delete-class-form-{{ $class->id }}" action="{{ route('masterdata.class.destroy', $class) }}" method="POST" class="inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button" class="text-red-600 hover:underline" onclick="confirmDeleteClass({{ $class->id }})">
+                                                        <button type="button" class="text-red hover:underline" onclick="confirmDeleteClass({{ $class->id }})">
                                                             Delete
                                                         </button>
                                                     </form>
