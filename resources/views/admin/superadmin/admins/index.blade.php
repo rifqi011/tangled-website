@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin.app-layout>
     <x-slot name="title">
         {{ __('Admin Management') }}
     </x-slot>
@@ -10,9 +10,9 @@
             </h2>
             @if (auth()->user()->isSuperAdmin())
                 <a href="{{ route('admins.create') }}"">
-                    <x-secondary-button>
+                    <x-admin.secondary-button>
                         Create Admin
-                    </x-secondary-button>
+                    </x-admin.secondary-button>
                 </a>
             @endif
         </div>
@@ -90,7 +90,6 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -113,4 +112,4 @@
             })
         }
     </script>
-</x-app-layout>
+</x-admin.app-layout>
