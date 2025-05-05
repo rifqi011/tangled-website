@@ -230,6 +230,9 @@
                                             Status
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                                            Total Reports
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                                             Actions
                                         </th>
                                     </tr>
@@ -245,24 +248,29 @@
                                                     {{ $class->status ? 'Active' : 'Inactive' }}
                                                 </span>
                                             </td>
+                                            <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                                                {{ $class->total_reports }}
+                                            </td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
                                                 <div class="flex space-x-2">
                                                     <button type="button" class="text-purple hover:underline" onclick="editClass({{ $class->id }}, '{{ $class->name }}', '{{ $class->status }}')">
                                                         Edit
                                                     </button>
-                                                    <form id="delete-class-form-{{ $class->id }}" action="{{ route('masterdata.class.destroy', $class) }}" method="POST" class="inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button" class="text-red hover:underline" onclick="confirmDeleteClass({{ $class->id }})">
-                                                            Delete
-                                                        </button>
-                                                    </form>
+                                                    @if ($class->total_reports == 0)
+                                                        <form id="delete-class-form-{{ $class->id }}" action="{{ route('masterdata.class.destroy', $class) }}" method="POST" class="inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" class="text-red hover:underline" onclick="confirmDeleteClass({{ $class->id }})">
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                                    @endif
                                                 </div>
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="3" class="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-500">
+                                            <td colspan="4" class="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-500">
                                                 No classes found.
                                             </td>
                                         </tr>

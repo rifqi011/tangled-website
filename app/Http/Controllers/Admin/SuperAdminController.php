@@ -201,6 +201,11 @@ class SuperAdminController extends Controller
      */
     public function destroyClass(ClassModel $class)
     {
+        if ($class->total_reports > 0) {
+            return redirect()->route('masterdata.index', ['tab' => 'classes'])
+                ->with('error', 'Cannot delete class with existing reports.');
+        }
+
         $class->delete();
 
         return redirect()->route('masterdata.index', ['tab' => 'classes'])
