@@ -153,13 +153,15 @@
                                                     <button type="button" class="text-purple hover:underline" onclick="editCategory({{ $category->id }}, '{{ $category->name }}', '{{ $category->status }}')">
                                                         Edit
                                                     </button>
-                                                    <form id="delete-category-form-{{ $category->id }}" action="{{ route('masterdata.category.destroy', $category) }}" method="POST" class="inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button" class="text-red hover:underline" onclick="confirmDeleteCategory({{ $category->id }})">
-                                                            Delete
-                                                        </button>
-                                                    </form>
+                                                    @if ($category->report_count == 0)
+                                                        <form id="delete-category-form-{{ $category->id }}" action="{{ route('masterdata.category.destroy', $category) }}" method="POST" class="inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" class="text-red hover:underline" onclick="confirmDeleteCategory({{ $category->id }})">
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                                    @endif
                                                 </div>
                                             </td>
                                         </tr>

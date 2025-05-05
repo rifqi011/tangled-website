@@ -147,6 +147,11 @@ class SuperAdminController extends Controller
      */
     public function destroyCategory(Category $category)
     {
+        if ($category->report_count > 0) {
+            return redirect()->route('masterdata.index', ['tab' => 'categories'])
+                ->with('error', 'Cannot delete category with existing reports.');
+        }
+
         $category->delete();
 
         return redirect()->route('masterdata.index', ['tab' => 'categories'])
