@@ -186,12 +186,12 @@
                                         <!-- Method will be added dynamically for edits -->
                                     </div>
                                     <div class="mb-4">
-                                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                                        <input type="text" name="name" id="categoryName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple focus:ring-purple" required>
+                                        <x-admin.input-label for="name" :value="__('Name')" />
+                                        <x-admin.text-input id="categoryName" class="mt-1 block w-full" type="text" name="name" :value="old('name')" required />
                                     </div>
                                     <div class="mb-4">
-                                        <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                                        <select name="status" id="categoryStatus" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple focus:ring-purple">
+                                        <x-admin.input-label for="name" :value="__('Status')" />
+                                        <select name="status" id="categoryStatus" class="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-purple focus:ring-purple">
                                             <option value="1">Active</option>
                                             <option value="0">Inactive</option>
                                         </select>
@@ -281,12 +281,12 @@
                                         <!-- Method will be added dynamically for edits -->
                                     </div>
                                     <div class="mb-4">
-                                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                                        <input type="text" name="name" id="className" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple focus:ring-purple" required>
+                                        <x-admin.input-label for="name" :value="__('Name')" />
+                                        <x-admin.text-input id="className" class="mt-1 block w-full" type="text" name="name" :value="old('name')" required />
                                     </div>
                                     <div class="mb-4">
-                                        <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                                        <select name="status" id="classStatus" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple focus:ring-purple">
+                                        <x-admin.input-label for="name" :value="__('Status')" />
+                                        <select name="status" id="classStatus" class="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-purple focus:ring-purple">
                                             <option value="1">Active</option>
                                             <option value="0">Inactive</option>
                                         </select>
