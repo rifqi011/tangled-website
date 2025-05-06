@@ -7,6 +7,7 @@ use App\Http\Controllers\User\LostItemController;
 use App\Http\Controllers\User\FoundItemController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\SuperAdminController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -38,8 +39,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::middleware('superadmin')->group(function () {
-        // Route untuk mengelola admin
-        Route::resource('admins', AdminController::class);
+        // Master data management routes
+        Route::get('/masterdata', [SuperAdminController::class, 'index'])->name('masterdata.index');
+
+        // Admin management
+        Route::get('/masterdata/admin/create', [SuperAdminController::class, 'createAdmin'])->name('masterdata.admin.create');
+        Route::post('/masterdata/admin', [SuperAdminController::class, 'storeAdmin'])->name('masterdata.admin.store');
+        Route::get('/masterdata/admin/{admin}/edit', [SuperAdminController::class, 'editAdmin'])->name('masterdata.admin.edit');
+        Route::put('/masterdata/admin/{admin}', [SuperAdminController::class, 'updateAdmin'])->name('masterdata.admin.update');
+        Route::delete('/masterdata/admin/{admin}', [SuperAdminController::class, 'destroyAdmin'])->name('masterdata.admin.destroy');
+
+        // Category management
+        Route::post('/masterdata/category', [SuperAdminController::class, 'storeCategory'])->name('masterdata.category.store');
+        Route::put('/masterdata/category/{category}', [SuperAdminController::class, 'updateCategory'])->name('masterdata.category.update');
+        Route::delete('/masterdata/category/{category}', [SuperAdminController::class, 'destroyCategory'])->name('masterdata.category.destroy');
+
+        // Class management
+        Route::post('/masterdata/class', [SuperAdminController::class, 'storeClass'])->name('masterdata.class.store');
+        Route::put('/masterdata/class/{class}', [SuperAdminController::class, 'updateClass'])->name('masterdata.class.update');
+        Route::delete('/masterdata/class/{class}', [SuperAdminController::class, 'destroyClass'])->name('masterdata.class.destroy');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

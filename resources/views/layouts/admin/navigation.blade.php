@@ -19,8 +19,8 @@
                     </div>
                     @if (auth()->user()->isSuperAdmin())
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            <x-admin.nav-link :href="route('admins.index')" :active="request()->routeIs('admins.index')">
-                                {{ __('Admin Management') }}
+                            <x-admin.nav-link :href="route('masterdata.index')" :active="request()->routeIs('masterdata.index')">
+                                {{ __('Master Data') }}
                             </x-nav-link>
                         </div>
                     @endif
@@ -79,8 +79,8 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             @if (auth()->user()->isSuperAdmin())
-                <x-admin.responsive-nav-link :href="route('admins.index')" :active="request()->routeIs('admins.index')">
-                    {{ __('Admin Management') }}
+                <x-admin.responsive-nav-link :href="route('masterdata.index')" :active="request()->routeIs('masterdata.index')">
+                    {{ __('Master Data') }}
                 </x-responsive-nav-link>
             @endif
         </div>

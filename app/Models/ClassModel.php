@@ -18,4 +18,9 @@ class ClassModel extends Model
     {
         return $this->hasMany(LostItem::class, 'class_id');
     }
+
+    public function getTotalReportsAttribute()
+    {
+        return $this->lostItems()->count();
+    }
 }

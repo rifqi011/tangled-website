@@ -22,4 +22,9 @@ class Category extends Model
     {
         return $this->hasMany(FoundItem::class, 'category_id');
     }
+
+    public function getReportCountAttribute()
+    {
+        return $this->lostItems()->count() + $this->foundItems()->count();
+    }
 }
