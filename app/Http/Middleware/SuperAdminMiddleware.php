@@ -13,6 +13,10 @@ class SuperAdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (str_starts_with($request->path(), 'storage/')) {
+            return $next($request);
+        }
+
         if (!$request->user() || $request->user()->role !== 'superadmin') {
             abort(403, 'Unauthorized action.');
         }

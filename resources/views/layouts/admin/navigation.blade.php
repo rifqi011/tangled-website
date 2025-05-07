@@ -17,6 +17,11 @@
                             {{ __('Dashboard') }}
                         </x-nav-link>
                     </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-admin.nav-link :href="route('reports')" :active="request()->routeIs('reports')">
+                            {{ __('Reports') }}
+                        </x-nav-link>
+                    </div>
                     @if (auth()->user()->isSuperAdmin())
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                             <x-admin.nav-link :href="route('masterdata.index')" :active="request()->routeIs('masterdata.index')">
@@ -57,7 +62,7 @@
                             </x-dropdown-link>
                         </form>
                     </x-slot>
-                </x-dropdown>
+                </x-admin.dropdown>
             </div>
 
             <!-- Hamburger -->
@@ -77,6 +82,9 @@
         <div class="space-y-1 pb-3 pt-2">
             <x-admin.responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-admin.responsive-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
+                {{ __('Reports') }}
             </x-responsive-nav-link>
             @if (auth()->user()->isSuperAdmin())
                 <x-admin.responsive-nav-link :href="route('masterdata.index')" :active="request()->routeIs('masterdata.index')">

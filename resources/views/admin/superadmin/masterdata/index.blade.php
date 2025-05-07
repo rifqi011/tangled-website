@@ -111,7 +111,7 @@
                     @elseif ($tab === 'categories')
                         <div class="mb-6 flex items-center justify-between">
                             <h3 class="text-lg font-medium">Category Management</h3>
-                            <button type="button" class="hover:bg-purple-700 rounded-md bg-purple px-4 py-2 text-white" onclick="toggleCategoryModal()">
+                            <button type="button" class="rounded-md bg-purple px-4 py-2 text-white hover:bg-purple" onclick="toggleCategoryModal()">
                                 Create Category
                             </button>
                         </div>
@@ -214,7 +214,7 @@
                     @elseif ($tab === 'classes')
                         <div class="mb-6 flex items-center justify-between">
                             <h3 class="text-lg font-medium">Class Management</h3>
-                            <button type="button" class="hover:bg-purple-700 rounded-md bg-purple px-4 py-2 text-white" onclick="toggleClassModal()">
+                            <button type="button" class="rounded-md bg-purple px-4 py-2 text-white hover:bg-purple" onclick="toggleClassModal()">
                                 Create Class
                             </button>
                         </div>
