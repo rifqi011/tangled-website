@@ -59,14 +59,14 @@
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{{ $item->class->name }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{{ $item->lost_date }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-white">
-                                                <span class="{{ $item->status === 'diproses' ? 'bg-red' : ($item->status === 'hilang' ? 'bg-purple' : ($item->status === 'disimpan' ? 'bg-blue-600' : 'bg-green')) }} inline-flex rounded-full px-2 text-xs font-semibold leading-5">
+                                                <span class="{{ $item->status === 'diproses' ? 'bg-blue-600' : ($item->status === 'hilang' ? 'bg-red' : ($item->status === 'disimpan' ? 'bg-purple' : 'bg-green')) }} inline-flex rounded-full px-2 text-xs font-semibold leading-5">
                                                     {{ $item->status }}
                                                 </span>
                                             </td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
-                                                <a href="{{ route('reports.show', ['type' => 'lost', 'id' => $item->id]) }}" class="mr-3 text-purple hover:underline">View</a>
-                                                <a href="{{ route('reports.edit', ['type' => 'lost', 'id' => $item->id]) }}" class="mr-3 text-blue-600 hover:underline">Edit</a>
-                                                <button onclick="confirmDelete('lost', {{ $item->id }})" class="text-red hover:underline">Delete</button>
+                                                <a href="{{ route('reports.show', ['type' => 'lost', 'slug' => $item->slug]) }}" class="mr-3 text-purple hover:underline">View</a>
+                                                <a href="{{ route('reports.edit', ['type' => 'lost', 'slug' => $item->slug]) }}" class="mr-3 text-blue-600 hover:underline">Edit</a>
+                                                <button onclick="confirmDelete('lost', '{{ $item->slug }}')" class="text-red hover:underline">Delete</button>
                                             </td>
                                         </tr>
                                     @empty
@@ -98,14 +98,14 @@
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{{ $item->found_date }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{{ $item->found_location }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-white">
-                                                <span class="{{ $item->status === 'diproses' ? 'bg-red' : ($item->status === 'disimpan' ? 'bg-purple' : 'bg-green') }} inline-flex rounded-full px-2 text-xs font-semibold leading-5">
+                                                <span class="{{ $item->status === 'diproses' ? 'bg-blue-600' : ($item->status === 'disimpan' ? 'bg-purple' : 'bg-green') }} inline-flex rounded-full px-2 text-xs font-semibold leading-5">
                                                     {{ $item->status }}
                                                 </span>
                                             </td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
-                                                <a href="{{ route('reports.show', ['type' => 'found', 'id' => $item->id]) }}" class="mr-3 text-purple hover:underline">View</a>
-                                                <a href="{{ route('reports.edit', ['type' => 'found', 'id' => $item->id]) }}" class="mr-3 text-blue-600 hover:underline">Edit</a>
-                                                <button onclick="confirmDelete('found', {{ $item->id }})" class="text-red hover:underline">Delete</button>
+                                                <a href="{{ route('reports.show', ['type' => 'found', 'slug' => $item->slug]) }}" class="mr-3 text-purple hover:underline">View</a>
+                                                <a href="{{ route('reports.edit', ['type' => 'found', 'slug' => $item->slug]) }}" class="mr-3 text-blue-600 hover:underline">Edit</a>
+                                                <button onclick="confirmDelete('found', '{{ $item->slug }}')" class="text-red hover:underline">Delete</button>
                                             </td>
                                         </tr>
                                     @empty
@@ -124,7 +124,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        function confirmDelete(type, id) {
+        function confirmDelete(type, slug) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -135,7 +135,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch(`/reports/${type}/${id}`, {
+                    fetch(`/reports/${type}/${slug}`, {
                             method: 'DELETE',
                             headers: {
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}',

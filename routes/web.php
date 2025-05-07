@@ -45,10 +45,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('reports');
 
     // Reports management
-    Route::get('/reports/{type}/{id}', [ReportsController::class, 'show'])->name('reports.show');
-    Route::get('/reports/{type}/{id}/edit', [ReportsController::class, 'edit'])->name('reports.edit');
-    Route::put('/reports/{type}/{id}', [ReportsController::class, 'update'])->name('reports.update');
-    Route::delete('/reports/{type}/{id}', [ReportsController::class, 'destroy'])->name('reports.destroy');
+    Route::get('/reports/{type}/{slug}', [ReportsController::class, 'show'])->name('reports.show');
+    Route::get('/reports/{type}/{slug}/edit', [ReportsController::class, 'edit'])->name('reports.edit');
+    Route::put('/reports/{type}/{slug}', [ReportsController::class, 'update'])->name('reports.update');
+    Route::delete('/reports/{type}/{slug}', [ReportsController::class, 'destroy'])->name('reports.destroy');
 
     Route::middleware('superadmin')->group(function () {
         // Master data management routes

@@ -8,54 +8,67 @@ use App\Models\FoundItem;
 use App\Models\Category;
 use App\Models\ClassModel;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ReportsController extends Controller
 {
-    public function show($type, $id)
+    public function show($type, $slug)
     {
-        $item = $this->getItem($type, $id);
+        $item = $this->getItem($type, $slug);
         return view('admin.reports.show', compact('item', 'type'));
     }
 
-    public function edit($type, $id)
+    public function edit($type, $slug)
     {
-        $item = $this->getItem($type, $id);
+        $item = $this->getItem($type, $slug);
         $categories = Category::all();
-        $classes = $type === 'lost' ? ClassModel::all() : null;
-        return view('admin.reports.edit', compact('item', 'type', 'categories', 'classes'));
+        $classes = ClassModel::all();
+
+        return view('admin.reports.edit', [
+            'item' => $item,
+            'type' => $type,
+            'categories' => $categories,
+            'classes' => $classes,
+            'statuses' => $this->getStatuses($type)
+        ]);
     }
 
-    public function update(Request $request, $type, $id)
+    public function update(Request $request, $type, $slug)
     {
-        $item = $this->getItem($type, $id);
+        $item = $this->getItem($type, $slug);
 
         $validated = $request->validate([
-            'status' => 'required|in:diproses,disimpan,selesai' . ($type === 'lost' ? ',hilang' : ''),
-            'category_id' => 'required|exists:categories,id',
-            'class_id' => $type === 'lost' ? 'required|exists:classes,id' : 'nullable',
+            'status' => ['required', 'string', Rule::in($this->getStatuses($type))],
         ]);
 
         $item->update($validated);
 
-        return redirect()->route('reports')->with('success', 'Report updated successfully');
+        return redirect()->route('reports')->with('success', 'Status updated successfully');
     }
 
-    public function destroy($type, $id)
+    public function destroy($type, $slug)
     {
-        $item = $this->getItem($type, $id);
+        $item = $this->getItem($type, $slug);
         $item->delete();
 
         return response()->json(['success' => true]);
     }
 
-    private function getItem($type, $id)
+    private function getItem($type, $slug)
     {
         if ($type === 'lost') {
-            return LostItem::with(['class', 'category'])->findOrFail($id);
+            return LostItem::with(['class', 'category'])->where('slug', $slug)->firstOrFail();
         } elseif ($type === 'found') {
-            return FoundItem::with('category')->findOrFail($id);
+            return FoundItem::with('category')->where('slug', $slug)->firstOrFail();
         }
 
         abort(404);
+    }
+
+    private function getStatuses($type)
+    {
+        return $type === 'lost'
+            ? ['diproses', 'hilang', 'disimpan', 'diambil']
+            : ['diproses', 'disimpan', 'diambil'];
     }
 }

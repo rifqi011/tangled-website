@@ -12,7 +12,7 @@
                     </div>
 
                     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                        <div class="w-full overflow-hidden rounded-3xl bg-center max-w-full object-cover">
+                        <div class="w-full max-w-full overflow-hidden rounded-3xl bg-center object-cover">
                             <img src="{{ asset($item->photo) }}" alt="Item photo">
                         </div>
 
@@ -52,7 +52,7 @@
                                 <div>
                                     <dt class="font-semibold">Status</dt>
                                     <dd>
-                                        <span class="{{ $item->status === 'diproses' ? 'bg-red' : ($item->status === 'hilang' ? 'bg-purple' : ($item->status === 'disimpan' ? 'bg-blue-600' : 'bg-green')) }} text-white inline-flex rounded-full px-2 text-xs font-semibold leading-5">
+                                        <span class="{{ $item->status === 'diproses' ? 'bg-red' : ($item->status === 'hilang' ? 'bg-purple' : ($item->status === 'disimpan' ? 'bg-blue-600' : 'bg-green')) }} inline-flex rounded-full px-2 text-xs font-semibold leading-5 text-white">
                                             {{ $item->status }}
                                         </span>
                                     </dd>
@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="mt-6 flex space-x-4">
-                        <a href="{{ route('reports.edit', ['type' => $type, 'id' => $item->id]) }}" class="inline-flex items-center rounded-md bg-purple px-4 py-2 text-white">Edit</a>
+                        <a href="{{ route('reports.edit', ['type' => $type, 'slug' => $item->slug]) }}" class="inline-flex items-center rounded-md bg-purple px-4 py-2 text-white">Edit</a>
                         <a href="{{ route('reports') }}" class="inline-flex items-center rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300">Back</a>
                     </div>
                 </div>
