@@ -15,7 +15,7 @@
 
                         <div class="mb-4">
                             <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                            <select name="status" id="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple focus:ring-purple">
+                            <select name="status" id="status" class="mt-1 block w-full rounded-md border-gray-300 border py-2 px-4 shadow-sm focus:border-purple focus:ring-purple">
                                 @foreach ($statuses as $status)
                                     <option value="{{ $status }}" {{ $item->status === $status ? 'selected' : '' }}>
                                         {{ ucfirst($status) }}
