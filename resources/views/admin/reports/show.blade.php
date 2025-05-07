@@ -11,9 +11,9 @@
                         <h2 class="text-2xl font-bold">{{ $item->title }}</h2>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <img src="{{ asset('storage/' . $item->photo) }}" alt="Item photo">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="w-full overflow-hidden rounded-3xl bg-center max-w-full object-cover">
+                            <img src="{{ asset($item->photo) }}" alt="Item photo">
                         </div>
 
                         <div>
