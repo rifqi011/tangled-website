@@ -6,9 +6,8 @@ use App\Http\Controllers\User\SearchController;
 use App\Http\Controllers\User\LostItemController;
 use App\Http\Controllers\User\FoundItemController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SuperAdminController;
-
+use App\Http\Controllers\Admin\ReportsController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::redirect('/home', '/', 301);
@@ -37,6 +36,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
+
+    Route::get('/dashboard/reports', function () {
+        $tab = request('tab', 'lost');
+        $lostItems = \App\Models\LostItem::with(['class', 'category'])->latest('lost_date')->get();
+        $foundItems = \App\Models\FoundItem::with('category')->latest('found_date')->get();
+        return view('admin.reports.index', compact('lostItems', 'foundItems', 'tab'));
+    })->name('reports');
+
+    // Reports management
+    Route::get('/reports/{type}/{slug}', [ReportsController::class, 'show'])->name('reports.show');
+    Route::get('/reports/{type}/{slug}/edit', [ReportsController::class, 'edit'])->name('reports.edit');
+    Route::put('/reports/{type}/{slug}', [ReportsController::class, 'update'])->name('reports.update');
+    Route::delete('/reports/{type}/{slug}', [ReportsController::class, 'destroy'])->name('reports.destroy');
 
     Route::middleware('superadmin')->group(function () {
         // Master data management routes
