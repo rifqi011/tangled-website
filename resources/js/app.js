@@ -36,54 +36,49 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// select category
+// File upload handling for all forms
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".select-category-btn").forEach((button) => {
-        button.addEventListener("click", function () {
-            // Hapus warna dari semua tombol
-            document.querySelectorAll(".select-category-btn").forEach((btn) => {
-                btn.classList.remove("!bg-purple", "!text-white");
-                btn.classList.add("!bg-gray-100", "!text-black");
-            });
-
-            // Tambahkan warna ke tombol yang dipilih
-            this.classList.add("!bg-purple", "!text-white");
-            this.classList.remove("!bg-gray-100", "!text-black");
-
-            // Simpan category_id ke hidden input
-            document.getElementById("category_id").value =
-                this.getAttribute("data-id");
-        });
-    });
-});
-
-// picture upload label
-document.addEventListener("DOMContentLoaded", function () {
-    const photoInput = document.getElementById("photo");
-    const uploadLabel = document.getElementById("upload-label");
+    const fileInput = document.getElementById("photo");
     const fileChosen = document.getElementById("file-chosen");
+    const fileInputLabel = document.getElementById("upload-label");
 
-    if (photoInput && uploadLabel && fileChosen) {
-        photoInput.addEventListener("change", function () {
-            if (photoInput.value) {
-                uploadLabel.textContent = "Gambar Terunggah";
-                uploadLabel.classList.add("bg-purple");
-                uploadLabel.classList.remove("bg-black");
-
-                if (this.files && this.files.length > 0) {
-                    fileChosen.textContent = this.files[0].name;
-                } else {
-                    fileChosen.textContent = "Tidak ada file dipilih";
-                }
+    if (fileInput && fileChosen) {
+        fileInput.addEventListener("change", function () {
+            if (fileInput.files.length > 0) {
+                fileInputLabel.classList.add("!bg-purple");
+                fileInputLabel.classList.add("!text-white");
+                fileChosen.textContent = fileInput.files[0].name;
             } else {
-                uploadLabel.textContent = "Upload Gambar";
-                uploadLabel.classList.add("bg-black");
-                uploadLabel.classList.remove("bg-purple");
+                fileInputLabel.classList.remove("!bg-purple");
+                fileInputLabel.classList.remove("!text-white");
+                fileChosen.textContent = "Tidak ada file dipilih";
             }
         });
     }
-});
 
+    // Category selection
+    const categoryButtons = document.querySelectorAll(".select-category-btn");
+    const categoryIdInput = document.getElementById("category_id");
+
+    if (categoryButtons.length > 0 && categoryIdInput) {
+        categoryButtons.forEach((button) => {
+            button.addEventListener("click", function () {
+                // Reset all buttons to default state
+                categoryButtons.forEach((btn) => {
+                    btn.classList.remove("!bg-purple");
+                    btn.classList.remove("!text-white");
+                });
+
+                // Set this button as selected
+                this.classList.add("!bg-purple");
+                this.classList.add("!text-white");
+
+                // Update hidden input with selected category ID
+                categoryIdInput.value = this.getAttribute("data-id");
+            });
+        });
+    }
+});
 // telephone input
 document.addEventListener("DOMContentLoaded", function () {
     const phoneInput = document.getElementById("userphone");
