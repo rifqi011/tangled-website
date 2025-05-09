@@ -4,7 +4,7 @@
             <a href="/home">
                 <img src="{{ asset('/images/icons/chevron-left.svg') }}" class="aspect-square h-8" alt="chevron left">
             </a>
-            <h1 class="text-2xl font-bold">Barang Temuan</h1>
+            <h1 class="text-2xl font-bold">Barang Disimpan</h1>
         </div>
 
         <div class="flex flex-col gap-5">
