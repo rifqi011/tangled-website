@@ -8,21 +8,36 @@ use App\Models\LostItem;
 use App\Models\ClassModel;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class LostItemController extends Controller
 {
     public function index()
     {
-        $lostItems = LostItem::where('status', '!=', 'diproses')->latest()->paginate(20)->withQueryString();
+        $cacheKey = 'lost_items_' . request()->page ?? 1;
+
+        $lostItems = Cache::remember($cacheKey, now()->addMinutes(10), function () {
+            return LostItem::with(['category', 'class'])
+                ->where('status', '!=', 'diproses')
+                ->latest()
+                ->paginate(20)
+                ->withQueryString();
+        });
 
         return view('user.lost-items.index', compact('lostItems'));
     }
 
     public function create()
     {
-        $categories = Category::where('status', 'active')->get();
-        $classes = ClassModel::where('status', 'active')->get();
+        $categories = Cache::remember('active_categories', now()->addHours(6), function () {
+            return Category::where('status', 'active')->get();
+        });
+
+        $classes = Cache::remember('active_classes', now()->addHours(6), function () {
+            return ClassModel::where('status', 'active')->get();
+        });
+
         return view('user.lost-items.create', compact('categories', 'classes'));
     }
 
@@ -99,17 +114,37 @@ class LostItemController extends Controller
             'category_id' => $request->category_id,
         ]);
 
+        // Clear related caches
+        $this->clearRelatedCaches();
+
         return redirect()->route('home')->with('success', 'Laporan barang hilang berhasil dikirim!');
     }
 
-    // show
     public function show($slug)
     {
-        $lostItem = LostItem::with(['class', 'category'])
-            ->where('slug', $slug)
-            ->where('status', '!=', 'diproses')
-            ->firstOrFail();
+        $cacheKey = 'lost_item_' . $slug;
+
+        $lostItem = Cache::remember($cacheKey, now()->addHours(1), function () use ($slug) {
+            return LostItem::with(['class', 'category'])
+                ->where('slug', $slug)
+                ->where('status', '!=', 'diproses')
+                ->firstOrFail();
+        });
 
         return view('user.lost-items.show', compact('lostItem'));
+    }
+
+    /**
+     * Clear all related caches when data changes
+     */
+    private function clearRelatedCaches()
+    {
+        // Clear lost items pages cache
+        for ($i = 1; $i <= 5; $i++) {
+            Cache::forget('lost_items_' . $i);
+        }
+
+        // Clear search results cache keys (if they exist)
+        Cache::flush('search_results_*');
     }
 }

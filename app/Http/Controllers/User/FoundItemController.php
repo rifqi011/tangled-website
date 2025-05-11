@@ -7,20 +7,32 @@ use App\Models\Category;
 use App\Models\FoundItem;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class FoundItemController extends Controller
 {
     public function index()
     {
-        $foundItems = FoundItem::where('status', 'disimpan')->latest()->paginate(20)->withQueryString();
+        $cacheKey = 'found_items_' . request()->page ?? 1;
+
+        $foundItems = Cache::remember($cacheKey, now()->addMinutes(10), function () {
+            return FoundItem::with('category')
+                ->where('status', 'disimpan')
+                ->latest()
+                ->paginate(20)
+                ->withQueryString();
+        });
 
         return view('user.found-items.index', compact('foundItems'));
     }
 
     public function create()
     {
-        $categories = Category::where('status', 'active')->get();
+        $categories = Cache::remember('active_categories', now()->addHours(6), function () {
+            return Category::where('status', 'active')->get();
+        });
+
         return view('user.found-items.create', compact('categories'));
     }
 
@@ -67,7 +79,7 @@ class FoundItemController extends Controller
             $photoPath = $request->file('photo')->store('found-images', 'public');
         }
 
-        // Simpan ke databas~e
+        // Simpan ke database
         FoundItem::create([
             'title' => $request->title,
             'slug' => Str::slug($request->title) . '-' . time(),
@@ -78,16 +90,40 @@ class FoundItemController extends Controller
             'category_id' => $request->category_id,
         ]);
 
+        // Clear related caches after adding new item
+        $this->clearRelatedCaches();
+
         return redirect()->route('home')->with('success', 'Laporan berhasil dikirim!');
     }
 
-    // show item
     public function show($slug)
     {
-        $foundItem = FoundItem::with('category')
-            ->where('slug', $slug)
-            ->where('status', '!=', 'diproses')
-            ->firstOrFail();
+        $cacheKey = 'found_item_' . $slug;
+
+        $foundItem = Cache::remember($cacheKey, now()->addHours(1), function () use ($slug) {
+            return FoundItem::with('category')
+                ->where('slug', $slug)
+                ->where('status', '!=', 'diproses')
+                ->firstOrFail();
+        });
+
         return view('user.found-items.show', compact('foundItem'));
+    }
+
+    /**
+     * Clear all related caches when data changes
+     */
+    private function clearRelatedCaches()
+    {
+        // Clear found items pages cache
+        for ($i = 1; $i <= 5; $i++) {
+            Cache::forget('found_items_' . $i);
+        }
+
+        // Clear home page cache
+        Cache::forget('home_found_items');
+
+        // Clear search results cache keys (if they exist)
+        Cache::flush('search_results_*');
     }
 }
