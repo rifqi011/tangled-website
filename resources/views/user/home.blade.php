@@ -6,7 +6,7 @@
     <x-user.swiper :images="$swiperImages" />
 
     <div class="mb-8 mt-6 flex flex-col gap-6">
-        <h1 class="text-2xl font-bold">Barang Disimpan</h1>
+        <h1 class="text-2xl font-bold">Barang Temuan</h1>
 
         @if (isset($foundItems) && count($foundItems) > 0)
             <div class="flex flex-col gap-5">
