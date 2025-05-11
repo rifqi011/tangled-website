@@ -1,1 +1,3 @@
-<hr class="my-4 bg-black">
+@props(['class' => ''])
+
+<hr class="{{ $class }} my-4 bg-black">

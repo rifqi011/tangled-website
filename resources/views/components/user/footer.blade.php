@@ -1,4 +1,4 @@
-<hr class="my-4 bg-black w-[90%] mx-auto">
+<x-user.form.divider class="w-[90%] mx-auto" />
 
 <footer class="mb-24 flex w-full flex-col items-center justify-center gap-2 text-lg font-medium">
     <p>&copy; {{ date('Y') }} Tangled. All rights reserved</p>
