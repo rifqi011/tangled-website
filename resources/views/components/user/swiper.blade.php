@@ -6,7 +6,7 @@
         <div class="swiper-wrapper">
             @foreach ($images as $image)
                 <div class="swiper-slide">
-                    <img src="{{ asset($image) }}" alt="Slide Image" class="h-[80%] w-full rounded-3xl object-cover">
+                    <img src="{{ asset($image) }}" alt="Slide Image" class="h-[80%] w-full rounded-3xl object-cover" loading="lazy">
                 </div>
             @endforeach
         </div>

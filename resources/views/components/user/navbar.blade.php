@@ -42,7 +42,7 @@
                 <span class="bg-purple {{ $isActive ? 'w-12' : 'w-0' }} absolute left-1/2 top-0 h-1 -translate-x-1/2 rounded-b-lg transition-all duration-200 ease-in-out"></span>
 
                 <a href="{{ $menuLink['href'] }}" class="{{ $isActive ? 'text-purple font-bold' : '' }} flex flex-col items-center gap-1 transition-all duration-200 ease-in">
-                    <img src="{{ asset('images/icons/' . $menuLink['icon'] . '.svg') }}" class="{{ $isActive ? 'scale-110' : '' }} w-7 transition-all duration-200 ease-in" alt="icon">
+                    <img src="{{ asset('images/icons/' . $menuLink['icon'] . '.svg') }}" class="{{ $isActive ? 'scale-110' : '' }} w-7 transition-all duration-200 ease-in" alt="icon" loading="eager">
 
                     <span class="text-sm font-medium">{{ $menuLink['name'] }}</span>
                 </a>
