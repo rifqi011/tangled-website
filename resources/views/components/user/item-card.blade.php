@@ -19,7 +19,7 @@
 
 <a href="{{ route($route, $item->slug ?? '#') }}" class="group flex min-h-[150px] gap-2 rounded-3xl bg-white shadow-card">
     <div class="relative w-[35%]">
-        <img src="{{ asset($item->photo) }}" class="absolute inset-0 h-full w-full rounded-l-3xl bg-gray-200 object-cover" loading="lazy" alt="{{ $item->title }}">
+        <img src="{{ asset($item->photo) }}" class="absolute inset-0 h-full w-full rounded-l-3xl bg-gray-200 object-cover z-0" loading="lazy" alt="{{ $item->title }}">
     </div>
 
     <div class="flex h-full w-2/3 flex-col justify-start p-2 pl-0">
