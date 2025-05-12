@@ -15,7 +15,16 @@ class LostItemController extends Controller
 {
     public function index()
     {
-        $cacheKey = 'lost_items_' . request()->page ?? 1;
+        // Check if data has been updated
+        $lastUpdated = Cache::get('lost_items_updated', 0);
+        $cacheKey = 'lost_items_' . (request()->page ?? 1) . '_' . $lastUpdated;
+
+        // Track this key for later clearing
+        $keys = Cache::get('cached_keys_lost_items', []);
+        if (!in_array($cacheKey, $keys)) {
+            $keys[] = $cacheKey;
+            Cache::put('cached_keys_lost_items', $keys, now()->addDays(30));
+        }
 
         $lostItems = Cache::remember($cacheKey, now()->addMinutes(10), function () {
             return LostItem::with(['category', 'class'])
@@ -30,13 +39,9 @@ class LostItemController extends Controller
 
     public function create()
     {
-        $categories = Cache::remember('active_categories', now()->addHours(6), function () {
-            return Category::where('status', 'active')->get();
-        });
-
-        $classes = Cache::remember('active_classes', now()->addHours(6), function () {
-            return ClassModel::where('status', 'active')->get();
-        });
+        // Don't use cache when displaying form
+        $categories = Category::where('status', 'active')->get();
+        $classes = ClassModel::where('status', 'active')->get();
 
         return view('user.lost-items.create', compact('categories', 'classes'));
     }
@@ -115,14 +120,20 @@ class LostItemController extends Controller
         ]);
 
         // Clear related caches
-        $this->clearRelatedCaches();
+        $this->clearAllCaches();
 
         return redirect()->route('home')->with('success', 'Laporan barang hilang berhasil dikirim!');
     }
 
     public function show($slug)
     {
+        // Track single item cache keys
         $cacheKey = 'lost_item_' . $slug;
+        $keys = Cache::get('cached_keys_lost_item', []);
+        if (!in_array($cacheKey, $keys)) {
+            $keys[] = $cacheKey;
+            Cache::put('cached_keys_lost_item', $keys, now()->addDays(30));
+        }
 
         $lostItem = Cache::remember($cacheKey, now()->addHours(1), function () use ($slug) {
             return LostItem::with(['class', 'category'])
@@ -137,14 +148,33 @@ class LostItemController extends Controller
     /**
      * Clear all related caches when data changes
      */
-    private function clearRelatedCaches()
+    private function clearAllCaches()
     {
-        // Clear lost items pages cache
-        for ($i = 1; $i <= 5; $i++) {
-            Cache::forget('lost_items_' . $i);
+        // Clear all lost items pages cache
+        $keys = Cache::get('cached_keys_lost_items', []);
+        foreach ($keys as $key) {
+            Cache::forget($key);
         }
 
-        // Clear search results cache keys (if they exist)
-        Cache::flush('search_results_*');
+        // Clear all individual item caches
+        $singleItemKeys = Cache::get('cached_keys_lost_item', []);
+        foreach ($singleItemKeys as $key) {
+            Cache::forget($key);
+        }
+
+        // Clear all search result caches
+        $searchKeys = Cache::get('cached_keys_search', []);
+        foreach ($searchKeys as $key) {
+            Cache::forget($key);
+        }
+
+        // Force refresh of listing pages next time they're accessed
+        Cache::put('lost_items_updated', time(), now()->addDays(30));
+
+        // Also clear found items timestamp to sync with home page
+        Cache::put('found_items_updated', time(), now()->addDays(30));
+
+        // Clear home page cache to ensure new items appear
+        Cache::forget('home_found_items');
     }
 }

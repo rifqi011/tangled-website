@@ -11,7 +11,14 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $foundItems = Cache::remember('home_found_items', now()->addMinutes(15), function () {
+        // Check for updates before using cache
+        $lastFoundUpdate = Cache::get('found_items_updated', 0);
+        $lastLostUpdate = Cache::get('lost_items_updated', 0);
+        $lastUpdate = max($lastFoundUpdate, $lastLostUpdate);
+
+        $cacheKey = 'home_found_items_' . $lastUpdate;
+
+        $foundItems = Cache::remember($cacheKey, now()->addMinutes(15), function () {
             return FoundItem::with('category')
                 ->where('status', 'disimpan')
                 ->latest()

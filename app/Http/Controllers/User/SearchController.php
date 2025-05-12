@@ -14,15 +14,24 @@ class SearchController extends Controller
 {
     public function index(Request $request)
     {
-        // Generate a cache key based on request parameters
+        // Generate a cache key based on request parameters and latest update timestamps
         $query = $request->input('query', '');
         $category = $request->input('category', 'Semua');
-        $cacheKey = 'search_results_' . md5($query . '_' . $category);
+        $lastFoundUpdate = Cache::get('found_items_updated', 0);
+        $lastLostUpdate = Cache::get('lost_items_updated', 0);
+        $lastUpdate = max($lastFoundUpdate, $lastLostUpdate);
 
-        // Fetch active categories (using cache from previous controllers)
-        $categories = Cache::remember('active_categories', now()->addHours(6), function () {
-            return Category::where('status', 'active')->get();
-        });
+        $cacheKey = 'search_results_' . md5($query . '_' . $category . '_' . $lastUpdate);
+
+        // Track this key for later clearing
+        $keys = Cache::get('cached_keys_search', []);
+        if (!in_array($cacheKey, $keys)) {
+            $keys[] = $cacheKey;
+            Cache::put('cached_keys_search', $keys, now()->addDays(30));
+        }
+
+        // Fetch active categories (don't use cache here to ensure we get latest)
+        $categories = Category::where('status', 'active')->get();
 
         // Get search results with caching
         $items = Cache::remember($cacheKey, now()->addMinutes(15), function () use ($request, $query, $category) {

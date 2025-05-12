@@ -29,9 +29,7 @@ class FoundItemController extends Controller
 
     public function create()
     {
-        $categories = Cache::remember('active_categories', now()->addHours(6), function () {
-            return Category::where('status', 'active')->get();
-        });
+        $categories = Category::where('status', 'active')->get();
 
         return view('user.found-items.create', compact('categories'));
     }
@@ -91,21 +89,17 @@ class FoundItemController extends Controller
         ]);
 
         // Clear related caches after adding new item
-        $this->clearRelatedCaches();
+        $this->clearAllCaches();
 
         return redirect()->route('home')->with('success', 'Laporan berhasil dikirim!');
     }
 
     public function show($slug)
     {
-        $cacheKey = 'found_item_' . $slug;
-
-        $foundItem = Cache::remember($cacheKey, now()->addHours(1), function () use ($slug) {
-            return FoundItem::with('category')
-                ->where('slug', $slug)
-                ->where('status', '!=', 'diproses')
-                ->firstOrFail();
-        });
+        $foundItem = FoundItem::with('category')
+            ->where('slug', $slug)
+            ->where('status', '!=', 'diproses')
+            ->firstOrFail();
 
         return view('user.found-items.show', compact('foundItem'));
     }
@@ -113,17 +107,30 @@ class FoundItemController extends Controller
     /**
      * Clear all related caches when data changes
      */
-    private function clearRelatedCaches()
+    private function clearAllCaches()
     {
-        // Clear found items pages cache
-        for ($i = 1; $i <= 5; $i++) {
-            Cache::forget('found_items_' . $i);
+        // Clear all found items pages cache
+        $keys = Cache::get('cached_keys_found_items', []);
+        foreach ($keys as $key) {
+            Cache::forget($key);
         }
 
         // Clear home page cache
         Cache::forget('home_found_items');
 
-        // Clear search results cache keys (if they exist)
-        Cache::flush('search_results_*');
+        // Clear all individual item caches
+        $singleItemKeys = Cache::get('cached_keys_found_item', []);
+        foreach ($singleItemKeys as $key) {
+            Cache::forget($key);
+        }
+
+        // Clear all search result caches
+        $searchKeys = Cache::get('cached_keys_search', []);
+        foreach ($searchKeys as $key) {
+            Cache::forget($key);
+        }
+
+        // Force refresh of home page and listing pages
+        Cache::put('found_items_updated', time(), now()->addDays(30));
     }
 }
