@@ -41,7 +41,7 @@
         </script>
     @endif
 
-    @if(session('error'))
+    @if (session('error'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 Swal.fire({
