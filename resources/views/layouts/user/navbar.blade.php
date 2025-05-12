@@ -12,7 +12,7 @@
         ],
         [
             'name' => 'Kehilangan',
-            'href' => 'lost-items.index',
+            'href' => 'lost-items.create',
             'icon' => 'file-search',
         ],
         [
