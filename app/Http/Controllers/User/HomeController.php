@@ -19,6 +19,9 @@ class HomeController extends Controller
                 ->get();
         });
 
-        return view('user.home', compact('foundItems'));
+        $totalItems = FoundItem::where('status', 'disimpan')->count();
+        $hasMoreItems = $totalItems > $foundItems->count();
+
+        return view('user.home', compact('foundItems', 'hasMoreItems'));
     }
 }

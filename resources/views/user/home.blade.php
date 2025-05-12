@@ -5,7 +5,7 @@
 <x-user.layout>
     <x-user.swiper :images="$swiperImages" />
 
-    <div class="mb-8 mt-6 flex flex-col gap-6">
+    <div class="mt-6 flex flex-col gap-6">
         <h1 class="text-2xl font-bold">Barang Temuan</h1>
 
         @if (isset($foundItems) && count($foundItems) > 0)
@@ -19,8 +19,7 @@
         @endif
     </div>
 
-    @if (isset($foundItems) && method_exists($foundItems, 'links'))
-        <x-user.button href="found-items" class="mt-6">Lihat lebih banyak</x-user.button>
+    @if (isset($foundItems) && $foundItems->isNotEmpty() && isset($hasMoreItems) && $hasMoreItems)
+        <x-user.button href="found-items" class="mt-6 w-full">Lihat lebih banyak</x-user.button>
     @endif
-    </div>
 </x-user.layout>
