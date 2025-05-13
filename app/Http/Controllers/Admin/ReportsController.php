@@ -12,6 +12,15 @@ use Illuminate\Validation\Rule;
 
 class ReportsController extends Controller
 {
+    public function index()
+    {
+        $tab = request('tab', 'lost');
+        $lostItems = LostItem::with(['class', 'category'])->latest('lost_date')->get();
+        $foundItems = FoundItem::with('category')->latest('found_date')->get();
+        
+        return view('admin.reports.index', compact('lostItems', 'foundItems', 'tab'));
+    }
+
     public function show($type, $slug)
     {
         $item = $this->getItem($type, $slug);

@@ -11,12 +11,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('admin.dashboard');
     })->name('dashboard');
 
-    Route::get('/dashboard/reports', function () {
-        $tab = request('tab', 'lost');
-        $lostItems = \App\Models\LostItem::with(['class', 'category'])->latest('lost_date')->get();
-        $foundItems = \App\Models\FoundItem::with('category')->latest('found_date')->get();
-        return view('admin.reports.index', compact('lostItems', 'foundItems', 'tab'));
-    })->name('reports');
+    Route::get('/dashboard/reports', [ReportsController::class, 'index'])->name('reports');
 
     // Reports management
     Route::get('/reports/{type}/{slug}', [ReportsController::class, 'show'])->name('reports.show');
