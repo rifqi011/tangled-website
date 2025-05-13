@@ -7,13 +7,22 @@ use App\Models\Category;
 use App\Models\FoundItem;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class FoundItemController extends Controller
 {
     public function index()
     {
-        $foundItems = FoundItem::whereIn('status', ['disimpan', 'diambil'])->latest()->paginate(20)->withQueryString();
+        $cacheKey = 'found_items_' . request()->page ?? 1;
+
+        $foundItems = Cache::remember($cacheKey, now()->addMinutes(10), function () {
+            return FoundItem::with('category')
+                ->where('status', 'disimpan')
+                ->latest()
+                ->paginate(20)
+                ->withQueryString();
+        });
 
         return view('user.found-items.index', compact('foundItems'));
     }
@@ -21,6 +30,7 @@ class FoundItemController extends Controller
     public function create()
     {
         $categories = Category::where('status', 'active')->get();
+
         return view('user.found-items.create', compact('categories'));
     }
 
@@ -67,7 +77,7 @@ class FoundItemController extends Controller
             $photoPath = $request->file('photo')->store('found-images', 'public');
         }
 
-        // Simpan ke databas~e
+        // Simpan ke database
         FoundItem::create([
             'title' => $request->title,
             'slug' => Str::slug($request->title) . '-' . time(),
@@ -78,16 +88,49 @@ class FoundItemController extends Controller
             'category_id' => $request->category_id,
         ]);
 
+        // Clear related caches after adding new item
+        $this->clearAllCaches();
+
         return redirect()->route('home')->with('success', 'Laporan berhasil dikirim!');
     }
 
-    // show item
     public function show($slug)
     {
         $foundItem = FoundItem::with('category')
             ->where('slug', $slug)
             ->where('status', '!=', 'diproses')
             ->firstOrFail();
+
         return view('user.found-items.show', compact('foundItem'));
+    }
+
+    /**
+     * Clear all related caches when data changes
+     */
+    private function clearAllCaches()
+    {
+        // Clear all found items pages cache
+        $keys = Cache::get('cached_keys_found_items', []);
+        foreach ($keys as $key) {
+            Cache::forget($key);
+        }
+
+        // Clear home page cache
+        Cache::forget('home_found_items');
+
+        // Clear all individual item caches
+        $singleItemKeys = Cache::get('cached_keys_found_item', []);
+        foreach ($singleItemKeys as $key) {
+            Cache::forget($key);
+        }
+
+        // Clear all search result caches
+        $searchKeys = Cache::get('cached_keys_search', []);
+        foreach ($searchKeys as $key) {
+            Cache::forget($key);
+        }
+
+        // Force refresh of home page and listing pages
+        Cache::put('found_items_updated', time(), now()->addDays(30));
     }
 }
