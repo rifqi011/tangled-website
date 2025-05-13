@@ -1,5 +1,5 @@
 @php
-    $swiperImages = ['/images/swiper-images/1.png', '/images/swiper-images/2.png', '/images/swiper-images/3.png'];
+    $swiperImages = ['/images/swiper-images/1.png', '/images/swiper-images/2.png', '/images/swiper-images/3.png', '/images/swiper-images/4.png'];
 @endphp
 
 <x-user.layout>
