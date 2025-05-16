@@ -15,23 +15,28 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-admin.nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
-                        </x-nav-link>
+                        </x-admin.nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-admin.nav-link :href="route('verify')" :active="request()->routeIs('verify')">
                             {{ __('Verify') }}
-                        </x-nav-link>
+                        </x-admin.nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-admin.nav-link :href="route('lost-item-found')" :active="request()->routeIs('lost-item-found')">
+                            {{ __('Lost Items Found') }}
+                        </x-admin.nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-admin.nav-link :href="route('reports')" :active="request()->routeIs('reports')">
                             {{ __('Reports') }}
-                        </x-nav-link>
+                        </x-admin.nav-link>
                     </div>
                     @if (auth()->user()->isSuperAdmin())
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                             <x-admin.nav-link :href="route('masterdata.index')" :active="request()->routeIs('masterdata.index')">
                                 {{ __('Master Data') }}
-                            </x-nav-link>
+                            </x-admin.nav-link>
                         </div>
                     @endif
                 @endauth
@@ -55,7 +60,7 @@
                     <x-slot name="content">
                         <x-admin.dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
-                        </x-dropdown-link>
+                        </x-admin.dropdown-link>
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -64,7 +69,7 @@
                             <x-admin.dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
-                            </x-dropdown-link>
+                            </x-admin.dropdown-link>
                         </form>
                     </x-slot>
                 </x-admin.dropdown>
@@ -87,18 +92,21 @@
         <div class="space-y-1 pb-3 pt-2">
             <x-admin.responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-            {{-- <x-admin.responsive-nav-link :href="route('verify')" :active="request()->routeIs('verify')">
-                {{ __('Verify') }}
-            </x-responsive-nav-link> --}}
-            <x-admin.responsive-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
-                {{ __('Reports') }}
-            </x-responsive-nav-link>
-            @if (auth()->user()->isSuperAdmin())
-                <x-admin.responsive-nav-link :href="route('masterdata.index')" :active="request()->routeIs('masterdata.index')">
-                    {{ __('Master Data') }}
                 </x-responsive-nav-link>
-            @endif
+                <x-admin.responsive-nav-link :href="route('verify')" :active="request()->routeIs('verify')">
+                    {{ __('Verify') }}
+                    </x-responsive-nav-link>
+                    <x-admin.responsive-nav-link :href="route('lost-item-found')" :active="request()->routeIs('lost-item-found')">
+                        {{ __('Lost Items Found') }}
+                        </x-responsive-nav-link>
+                        <x-admin.responsive-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
+                            {{ __('Reports') }}
+                            </x-responsive-nav-link>
+                            @if (auth()->user()->isSuperAdmin())
+                                <x-admin.responsive-nav-link :href="route('masterdata.index')" :active="request()->routeIs('masterdata.index')">
+                                    {{ __('Master Data') }}
+                                    </x-responsive-nav-link>
+                            @endif
         </div>
 
         <!-- Responsive Settings Options -->
@@ -111,17 +119,17 @@
             <div class="mt-3 space-y-1">
                 <x-admin.responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-admin.responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
                     </x-responsive-nav-link>
-                </form>
+
+                    <!-- Authentication -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <x-admin.responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                            {{ __('Log Out') }}
+                            </x-responsive-nav-link>
+                    </form>
             </div>
         </div>
     </div>

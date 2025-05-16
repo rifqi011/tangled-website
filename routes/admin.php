@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\LostItemFoundController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SuperAdminController;
@@ -25,6 +26,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Reports show
     Route::get('/reports/{type}/{slug}', [ReportsController::class, 'show'])->name('reports.show');
+
+    // Lost item found confirmation
+    Route::get('/lost-item-found', [LostItemFoundController::class, 'index'])->name('lost-item-found');
+    Route::get('/lost-item-found/{slug}', [LostItemFoundController::class, 'show'])->name('lost-item-found.show');
+    Route::post('/lost-item-found/{slug}/found', [LostItemFoundController::class, 'found'])->name('lost-item-found.found');
 
     Route::middleware('superadmin')->group(function () {
         // Master data management routes

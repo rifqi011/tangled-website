@@ -27,9 +27,15 @@ class VerifyController extends Controller
     private function getItem($type, $slug)
     {
         if ($type === 'lost') {
-            return LostItem::with(['class', 'category'])->where('slug', $slug)->firstOrFail();
+            return LostItem::with(['class', 'category'])
+            ->where('slug', $slug)
+            ->where('status', 'diproses')
+            ->firstOrFail();
         } elseif ($type === 'found') {
-            return FoundItem::with('category')->where('slug', $slug)->firstOrFail();
+            return FoundItem::with('category')
+            ->where('slug', $slug)
+            ->where('status', 'diproses')
+            ->firstOrFail();
         }
 
         abort(404);
