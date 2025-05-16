@@ -23,11 +23,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard/reports', [ReportsController::class, 'index'])->name('reports');
 
-    // Reports management
+    // Reports show
     Route::get('/reports/{type}/{slug}', [ReportsController::class, 'show'])->name('reports.show');
-    Route::get('/reports/{type}/{slug}/edit', [ReportsController::class, 'edit'])->name('reports.edit');
-    Route::put('/reports/{type}/{slug}', [ReportsController::class, 'update'])->name('reports.update');
-    Route::delete('/reports/{type}/{slug}', [ReportsController::class, 'destroy'])->name('reports.destroy');
 
     Route::middleware('superadmin')->group(function () {
         // Master data management routes
@@ -49,6 +46,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/masterdata/class', [SuperAdminController::class, 'storeClass'])->name('masterdata.class.store');
         Route::put('/masterdata/class/{class}', [SuperAdminController::class, 'updateClass'])->name('masterdata.class.update');
         Route::delete('/masterdata/class/{class}', [SuperAdminController::class, 'destroyClass'])->name('masterdata.class.destroy');
+
+        // Report management
+        Route::get('/reports/{type}/{slug}/edit', [ReportsController::class, 'edit'])->name('reports.edit');
+        Route::put('/reports/{type}/{slug}', [ReportsController::class, 'update'])->name('reports.update');
+        Route::delete('/reports/{type}/{slug}', [ReportsController::class, 'destroy'])->name('reports.destroy');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
