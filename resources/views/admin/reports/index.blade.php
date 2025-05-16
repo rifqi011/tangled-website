@@ -65,8 +65,10 @@
                                             </td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
                                                 <a href="{{ route('reports.show', ['type' => 'lost', 'slug' => $item->slug]) }}" class="mr-3 text-purple hover:underline">View</a>
-                                                <a href="{{ route('reports.edit', ['type' => 'lost', 'slug' => $item->slug]) }}" class="mr-3 text-blue-600 hover:underline">Edit</a>
-                                                <button onclick="confirmDelete('lost', '{{ $item->slug }}')" class="text-red hover:underline">Delete</button>
+                                                @if (auth()->user()->isSuperAdmin())
+                                                    <a href="{{ route('reports.edit', ['type' => 'lost', 'slug' => $item->slug]) }}" class="mr-3 text-blue-600 hover:underline">Edit</a>
+                                                    <button onclick="confirmDelete('lost', '{{ $item->slug }}')" class="text-red hover:underline">Delete</button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @empty
@@ -104,8 +106,10 @@
                                             </td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
                                                 <a href="{{ route('reports.show', ['type' => 'found', 'slug' => $item->slug]) }}" class="mr-3 text-purple hover:underline">View</a>
-                                                <a href="{{ route('reports.edit', ['type' => 'found', 'slug' => $item->slug]) }}" class="mr-3 text-blue-600 hover:underline">Edit</a>
-                                                <button onclick="confirmDelete('found', '{{ $item->slug }}')" class="text-red hover:underline">Delete</button>
+                                                @if (auth()->user()->isSuperAdmin())
+                                                    <a href="{{ route('reports.edit', ['type' => 'found', 'slug' => $item->slug]) }}" class="mr-3 text-blue-600 hover:underline">Edit</a>
+                                                    <button onclick="confirmDelete('found', '{{ $item->slug }}')" class="text-red hover:underline">Delete</button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @empty
