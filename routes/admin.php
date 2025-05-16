@@ -4,12 +4,22 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SuperAdminController;
 use App\Http\Controllers\Admin\ReportsController;
+use App\Http\Controllers\Admin\VerifyController;
+use App\Http\Controllers\Admin\ReportVerificationController;
 
 // Dashboard page with auth
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
+
+    // Reports verification
+    Route::get('/dashboard/verify', [VerifyController::class, 'index'])->name('verify');
+    Route::get('/dashboard/verify/{type}/{slug}', [VerifyController::class, 'show'])->name('verify.show');
+
+    // Report verification and decline routes
+    Route::post('/reports/{type}/{slug}/verify', [ReportVerificationController::class, 'verify'])->name('reports.verify');
+    Route::post('/reports/{type}/{slug}/decline', [ReportVerificationController::class, 'decline'])->name('reports.decline');
 
     Route::get('/dashboard/reports', [ReportsController::class, 'index'])->name('reports');
 
