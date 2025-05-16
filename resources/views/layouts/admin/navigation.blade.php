@@ -18,6 +18,11 @@
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-admin.nav-link :href="route('verify')" :active="request()->routeIs('verify')">
+                            {{ __('Verify') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-admin.nav-link :href="route('reports')" :active="request()->routeIs('reports')">
                             {{ __('Reports') }}
                         </x-nav-link>
@@ -83,6 +88,9 @@
             <x-admin.responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            {{-- <x-admin.responsive-nav-link :href="route('verify')" :active="request()->routeIs('verify')">
+                {{ __('Verify') }}
+            </x-responsive-nav-link> --}}
             <x-admin.responsive-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
                 {{ __('Reports') }}
             </x-responsive-nav-link>
