@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Services\WhatsAppService;
 use App\Models\LostItem;
 use App\Models\FoundItem;
 use Illuminate\Http\Request;
@@ -12,6 +13,19 @@ use Illuminate\Support\Facades\Storage;
 
 class ReportVerificationController extends Controller
 {
+    protected $whatsAppService;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param WhatsAppService $whatsAppService
+     * @return void
+     */
+    public function __construct(WhatsAppService $whatsAppService)
+    {
+        $this->whatsAppService = $whatsAppService;
+    }
+
     /**
      * Verify a report item.
      *
@@ -28,7 +42,7 @@ class ReportVerificationController extends Controller
             $item->save();
 
             // Send WhatsApp notification
-            $this->sendWhatsAppNotification(
+            $this->whatsAppService->sendNotification(
                 $item->userphone,
                 "Halo {$item->username}!\nLaporan kehilangan kamu dengan judul \"{$item->title}\" sudah diverifikasi.\nTim kami akan menampilkannya di halaman pencarian supaya lebih mudah ditemukan.\nTerima kasih sudah melapor!"
             );
@@ -65,7 +79,7 @@ class ReportVerificationController extends Controller
             $item = LostItem::where('slug', $slug)->firstOrFail();
 
             // Send WhatsApp notification before deletion
-            $this->sendWhatsAppNotification(
+            $this->whatsAppService->sendNotification(
                 $item->userphone,
                 "Hai {$item->username}, Maaf, laporan kehilangan kamu dengan judul \"{$item->title}\" tidak dapat kami verifikasi.\nAlasan: {$reason} Silakan periksa kembali data laporanmu dan ajukan ulang jika diperlukan. Terima kasih atas pengertiannya!"
             );
@@ -114,37 +128,5 @@ class ReportVerificationController extends Controller
         }
 
         return response()->json(['success' => false, 'message' => 'Invalid report type'], 400);
-    }
-
-    /**
-     * Send WhatsApp notification using Fonnte API.
-     *
-     * @param string $phone
-     * @param string $message
-     * @return void
-     */
-    private function sendWhatsAppNotification($phone, $message)
-    {
-        try {
-            $response = Http::withHeaders([
-                'Authorization' => env('FONNTE_TOKEN'),
-            ])->post('https://api.fonnte.com/send', [
-                'target' => $phone,
-                'message' => $message
-            ]);
-
-            // Log the response or handle errors if needed
-            if (!$response->successful()) {
-                Log::error('WhatsApp notification failed', [
-                    'phone' => $phone,
-                    'response' => $response->body()
-                ]);
-            }
-        } catch (\Exception $e) {
-            Log::error('WhatsApp notification error', [
-                'phone' => $phone,
-                'error' => $e->getMessage()
-            ]);
-        }
     }
 }
