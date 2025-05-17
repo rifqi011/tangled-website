@@ -13,12 +13,20 @@ class RetrievalController extends Controller
 {
     public function index()
     {
+        $tab = request('tab', 'items');
         $foundItems = FoundItem::with('category')
             ->where('status', 'disimpan')
             ->latest('found_date')
             ->get();
+        
+        $retrievals = Retrieval::with('foundItem')
+            ->whereHas('foundItem', function ($query) {
+                $query->where('status', 'diambil');
+            })
+            ->latest('retrieval_date')
+            ->get();
 
-        return view('admin.retrieval.index', compact('foundItems'));
+        return view('admin.retrieval.index', compact('foundItems', 'retrievals', 'tab'));
     }
 
     public function show($slug)
