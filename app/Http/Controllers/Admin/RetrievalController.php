@@ -87,4 +87,15 @@ class RetrievalController extends Controller
         return redirect()->route('retrieval')
             ->with('success', 'Item successfully retrieved by ' . $request->username);
     }
+
+    public function destroy($id)
+    {
+        $retrieval = Retrieval::where('id', $id)->firstOrFail();
+        $retrieval->delete();
+
+        $foundItem = FoundItem::findOrFail($retrieval->found_item_id);
+        $foundItem->update(['status' => 'disimpan']);
+
+        return response()->json(['success' => true]);
+    }
 }

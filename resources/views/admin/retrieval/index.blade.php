@@ -119,6 +119,12 @@
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                                                 {{ \Carbon\Carbon::parse($retrieval->retrieval_date)->format('d M Y') }}
                                             </td>
+                                            <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
+                                                <a href="{{ route('reports.show', ['type' => 'found', 'slug' => $retrieval->foundItem->slug]) }}" class="mr-3 text-purple hover:underline">View Item</a>
+                                                @if (auth()->user()->isSuperAdmin())
+                                                    <button onclick="confirmDelete('{{ $retrieval->id }}')" class="text-red hover:underline">Delete</button>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @empty
                                         <tr>
@@ -135,4 +141,35 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/retrievals/${id}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'Accept': 'application/json'
+                            }
+                        }).then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire('Deleted!', 'Report has been deleted.', 'success')
+                                    .then(() => location.reload());
+                            }
+                        });
+                }
+            });
+        }
+    </script>
 </x-admin.app-layout>
