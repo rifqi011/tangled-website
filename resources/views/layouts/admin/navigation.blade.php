@@ -28,6 +28,11 @@
                         </x-admin.nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-admin.nav-link :href="route('retrieval')" :active="request()->routeIs('retrieval')">
+                            {{ __('Retrievals') }}
+                        </x-admin.nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-admin.nav-link :href="route('reports')" :active="request()->routeIs('reports')">
                             {{ __('Reports') }}
                         </x-admin.nav-link>
@@ -92,21 +97,24 @@
         <div class="space-y-1 pb-3 pt-2">
             <x-admin.responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
-                </x-responsive-nav-link>
-                <x-admin.responsive-nav-link :href="route('verify')" :active="request()->routeIs('verify')">
-                    {{ __('Verify') }}
-                    </x-responsive-nav-link>
-                    <x-admin.responsive-nav-link :href="route('lost-item-found')" :active="request()->routeIs('lost-item-found')">
-                        {{ __('Lost Items Found') }}
-                        </x-responsive-nav-link>
-                        <x-admin.responsive-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
-                            {{ __('Reports') }}
-                            </x-responsive-nav-link>
-                            @if (auth()->user()->isSuperAdmin())
-                                <x-admin.responsive-nav-link :href="route('masterdata.index')" :active="request()->routeIs('masterdata.index')">
-                                    {{ __('Master Data') }}
-                                    </x-responsive-nav-link>
-                            @endif
+            </x-admin.responsive-nav-link>
+            <x-admin.responsive-nav-link :href="route('verify')" :active="request()->routeIs('verify')">
+                {{ __('Verify') }}
+            </x-admin.responsive-nav-link>
+            <x-admin.responsive-nav-link :href="route('lost-item-found')" :active="request()->routeIs('lost-item-found')">
+                {{ __('Lost Items Found') }}
+            </x-admin.responsive-nav-link>
+            <x-admin.responsive-nav-link :href="route('retrieval')" :active="request()->routeIs('retrieval')">
+                {{ __('Retrievals') }}
+            </x-admin.responsive-nav-link>
+            <x-admin.responsive-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
+                {{ __('Reports') }}
+            </x-admin.responsive-nav-link>
+            @if (auth()->user()->isSuperAdmin())
+                <x-admin.responsive-nav-link :href="route('masterdata.index')" :active="request()->routeIs('masterdata.index')">
+                    {{ __('Master Data') }}
+                </x-admin.responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
@@ -119,17 +127,17 @@
             <div class="mt-3 space-y-1">
                 <x-admin.responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
-                    </x-responsive-nav-link>
+                </x-admin.responsive-nav-link>
 
-                    <!-- Authentication -->
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
 
-                        <x-admin.responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+                    <x-admin.responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                            {{ __('Log Out') }}
-                            </x-responsive-nav-link>
-                    </form>
+                        {{ __('Log Out') }}
+                    </x-admin.responsive-nav-link>
+                </form>
             </div>
         </div>
     </div>

@@ -16,8 +16,8 @@ class ReportsController extends Controller
     {
         $tab = request('tab', 'lost');
         $lostItems = LostItem::with(['class', 'category'])->latest('lost_date')->get();
-        $foundItems = FoundItem::with('category')->latest('found_date')->get();
-        
+        $foundItems = FoundItem::with(['category', 'retrievals'])->latest('found_date')->get();
+
         return view('admin.reports.index', compact('lostItems', 'foundItems', 'tab'));
     }
 
@@ -57,6 +57,17 @@ class ReportsController extends Controller
 
     public function destroy($type, $slug)
     {
+        if ($type === 'found') {
+            $item = FoundItem::with('retrievals')->where('slug', $slug)->firstOrFail();
+
+            if (!$item->retrievals->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Cannot delete item with existing retrievals'
+                ], 403);
+            }
+        }
+
         $item = $this->getItem($type, $slug);
         $item->delete();
 

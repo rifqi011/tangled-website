@@ -28,4 +28,14 @@ class FoundItem extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    public function retrieval()
+    {
+        return $this->hasOne(Retrieval::class, 'found_item_id');
+    }
+
+    public function retrievals()
+    {
+        return $this->hasMany(Retrieval::class);
+    }
 }

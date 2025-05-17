@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SuperAdminController;
 use App\Http\Controllers\Admin\ReportsController;
 use App\Http\Controllers\Admin\VerifyController;
 use App\Http\Controllers\Admin\ReportVerificationController;
+use App\Http\Controllers\Admin\RetrievalController;
 
 // Dashboard page with auth
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -31,6 +32,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/lost-item-found', [LostItemFoundController::class, 'index'])->name('lost-item-found');
     Route::get('/lost-item-found/{slug}', [LostItemFoundController::class, 'show'])->name('lost-item-found.show');
     Route::post('/lost-item-found/{slug}/found', [LostItemFoundController::class, 'found'])->name('lost-item-found.found');
+
+    // Retrieval management
+    Route::get('/retrievals', [RetrievalController::class, 'index'])->name('retrieval');
+    Route::get('/retrievals/{slug}', [RetrievalController::class, 'show'])->name('retrieval.show');
+    Route::get('/retrievals/{slug}/create', [RetrievalController::class, 'create'])->name('retrieval.create');
+    Route::post('/retrievals/store', [RetrievalController::class, 'store'])->name('retrieval.store');
 
     Route::middleware('superadmin')->group(function () {
         // Master data management routes
@@ -57,6 +64,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/reports/{type}/{slug}/edit', [ReportsController::class, 'edit'])->name('reports.edit');
         Route::put('/reports/{type}/{slug}', [ReportsController::class, 'update'])->name('reports.update');
         Route::delete('/reports/{type}/{slug}', [ReportsController::class, 'destroy'])->name('reports.destroy');
+
+        // Retrieval delete
+        Route::delete('/retrievals/{id}', [RetrievalController::class, 'destroy'])->name('retrieval.destroy');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
