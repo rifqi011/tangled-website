@@ -33,4 +33,9 @@ class FoundItem extends Model
     {
         return $this->hasOne(Retrieval::class, 'found_item_id');
     }
+
+    public function retrievals()
+    {
+        return $this->hasMany(Retrieval::class);
+    }
 }

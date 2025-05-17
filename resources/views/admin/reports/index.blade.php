@@ -108,7 +108,9 @@
                                                 <a href="{{ route('reports.show', ['type' => 'found', 'slug' => $item->slug]) }}" class="mr-3 text-purple hover:underline">View</a>
                                                 @if (auth()->user()->isSuperAdmin())
                                                     <a href="{{ route('reports.edit', ['type' => 'found', 'slug' => $item->slug]) }}" class="mr-3 text-blue-600 hover:underline">Edit</a>
-                                                    <button onclick="confirmDelete('found', '{{ $item->slug }}')" class="text-red hover:underline">Delete</button>
+                                                    @if ($item->retrievals->isEmpty())
+                                                        <button onclick="confirmDelete('found', '{{ $item->slug }}')" class="text-red hover:underline">Delete</button>
+                                                    @endif
                                                 @endif
                                             </td>
                                         </tr>
