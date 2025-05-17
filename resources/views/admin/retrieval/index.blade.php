@@ -46,7 +46,7 @@
                                             </span>
                                         </td>
                                         <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
-                                            <a href="{{ route('retrievals.show', $item->slug) }}" class="mr-3 text-purple hover:underline">View</a>
+                                            <a href="{{ route('retrieval.show', $item->slug) }}" class="mr-3 text-purple hover:underline">View</a>
                                         </td>
                                     </tr>
                                 @empty

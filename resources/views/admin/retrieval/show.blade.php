@@ -47,8 +47,8 @@
                     </div>
 
                     <div class="mt-6 flex space-x-4">
-                        <a href="{{ route('retrievals.create', $item->slug) }}" class="inline-flex items-center rounded-md bg-purple px-4 py-2 text-white">Create Retrieval</a>
-                        <a href="{{ route('retrievals') }}" class="inline-flex items-center rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300">Back</a>
+                        <a href="{{ route('retrieval.create', $item->slug) }}" class="inline-flex items-center rounded-md bg-purple px-4 py-2 text-white">Create Retrieval</a>
+                        <a href="{{ route('retrieval') }}" class="inline-flex items-center rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300">Back</a>
                     </div>
                 </div>
             </div>

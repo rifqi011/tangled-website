@@ -31,6 +31,6 @@ class FoundItem extends Model
 
     public function retrieval()
     {
-        return $this->hasOne(Retrieval::class);
+        return $this->hasOne(Retrieval::class, 'found_item_id');
     }
 }

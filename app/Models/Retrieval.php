@@ -22,11 +22,11 @@ class Retrieval extends Model
 
     public function foundItem()
     {
-        return $this->belongsTo(FoundItem::class);
+        return $this->belongsTo(FoundItem::class, 'found_item_id');
     }
 
     public function class()
     {
-        return $this->belongsTo(ClassModel::class);
+        return $this->belongsTo(ClassModel::class, 'class_id');
     }
 }

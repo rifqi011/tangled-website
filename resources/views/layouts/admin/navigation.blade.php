@@ -28,7 +28,7 @@
                         </x-admin.nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-admin.nav-link :href="route('retrievals')" :active="request()->routeIs('retrievals')">
+                        <x-admin.nav-link :href="route('retrieval')" :active="request()->routeIs('retrieval')">
                             {{ __('Retrievals') }}
                         </x-admin.nav-link>
                     </div>
@@ -104,7 +104,7 @@
             <x-admin.responsive-nav-link :href="route('lost-item-found')" :active="request()->routeIs('lost-item-found')">
                 {{ __('Lost Items Found') }}
             </x-admin.responsive-nav-link>
-            <x-admin.responsive-nav-link :href="route('retrievals')" :active="request()->routeIs('retrievals')">
+            <x-admin.responsive-nav-link :href="route('retrieval')" :active="request()->routeIs('retrieval')">
                 {{ __('Retrievals') }}
             </x-admin.responsive-nav-link>
             <x-admin.responsive-nav-link :href="route('reports')" :active="request()->routeIs('reports')">

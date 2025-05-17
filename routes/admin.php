@@ -34,8 +34,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/lost-item-found/{slug}/found', [LostItemFoundController::class, 'found'])->name('lost-item-found.found');
 
     // Retrieval management
-    Route::get('/retrievals', [RetrievalController::class, 'index'])->name('retrievals');
-    Route::get('/retrievals/{slug}', [RetrievalController::class, 'show'])->name('retrievals.show');
+    Route::get('/retrievals', [RetrievalController::class, 'index'])->name('retrieval');
+    Route::get('/retrievals/{slug}', [RetrievalController::class, 'show'])->name('retrieval.show');
+    Route::get('/retrievals/{slug}/create', [RetrievalController::class, 'create'])->name('retrieval.create');
+    Route::post('/retrievals/store', [RetrievalController::class, 'store'])->name('retrieval.store');
 
     Route::middleware('superadmin')->group(function () {
         // Master data management routes

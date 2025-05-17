@@ -21,7 +21,7 @@ class ClassModel extends Model
 
     public function retrievals()
     {
-        return $this->hasMany(Retrieval::class);
+        return $this->hasMany(Retrieval::class, 'class_id');
     }
 
     public function getTotalReportsAttribute()
