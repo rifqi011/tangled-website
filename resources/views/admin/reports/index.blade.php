@@ -4,10 +4,13 @@
     </x-slot>
 
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
+        <div class="flex flex-col items-center justify-between sm:flex-row">
+            <h2 class="mb-4 text-xl font-semibold leading-tight text-gray-800 sm:mb-0">
                 {{ __('Report Data Management') }}
             </h2>
+
+            <!-- Search Form Component -->
+            <x-admin.search-form route="reports" :searchTerm="$search" placeholder="Search {{ $tab === 'lost' ? 'lost' : 'found' }} items..." :hiddenInputs="['tab' => $tab]" />
         </div>
     </x-slot>
 
@@ -25,12 +28,12 @@
                     <div class="mb-6 border-b border-gray-200">
                         <ul class="-mb-px flex flex-wrap text-center text-sm font-medium">
                             <li class="mr-2">
-                                <a href="{{ route('reports', ['tab' => 'lost']) }}" class="{{ $tab === 'lost' ? 'text-purple border-b-2 border-purple rounded-t-lg active' : 'text-gray-500 hover:text-gray-600 hover:border-gray-300 border-b-2 border-transparent rounded-t-lg' }} inline-block p-4">
+                                <a href="{{ route('reports', ['tab' => 'lost', 'search' => $search]) }}" class="{{ $tab === 'lost' ? 'text-purple border-b-2 border-purple rounded-t-lg active' : 'text-gray-500 hover:text-gray-600 hover:border-gray-300 border-b-2 border-transparent rounded-t-lg' }} inline-block p-4">
                                     Lost Items
                                 </a>
                             </li>
                             <li class="mr-2">
-                                <a href="{{ route('reports', ['tab' => 'found']) }}" class="{{ $tab === 'found' ? 'text-purple border-b-2 border-purple rounded-t-lg active' : 'text-gray-500 hover:text-gray-600 hover:border-gray-300 border-b-2 border-transparent rounded-t-lg' }} inline-block p-4">
+                                <a href="{{ route('reports', ['tab' => 'found', 'search' => $search]) }}" class="{{ $tab === 'found' ? 'text-purple border-b-2 border-purple rounded-t-lg active' : 'text-gray-500 hover:text-gray-600 hover:border-gray-300 border-b-2 border-transparent rounded-t-lg' }} inline-block p-4">
                                     Found Items
                                 </a>
                             </li>
@@ -78,6 +81,11 @@
                                     @endforelse
                                 </tbody>
                             </table>
+
+                            <!-- Pagination for Lost Items -->
+                            <div class="mt-4 px-4 py-3 sm:px-6">
+                                {{ $lostItems->links() }}
+                            </div>
                         </div>
                     @elseif ($tab === 'found')
                         <div class="overflow-x-auto">
@@ -121,6 +129,24 @@
                                     @endforelse
                                 </tbody>
                             </table>
+
+                            <!-- Pagination for Found Items -->
+                            <div class="mt-4 px-4 py-3 sm:px-6">
+                                {{ $foundItems->links() }}
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- Search Results Status -->
+                    @if ($search)
+                        <div class="mt-4 text-sm text-gray-500">
+                            @if ($tab === 'lost')
+                                {{ $lostItems->total() }} results found for "{{ $search }}" in lost items
+                                <a href="{{ route('reports', ['tab' => 'lost']) }}" class="ml-2 text-purple hover:underline">Clear search</a>
+                            @else
+                                {{ $foundItems->total() }} results found for "{{ $search }}" in found items
+                                <a href="{{ route('reports', ['tab' => 'found']) }}" class="ml-2 text-purple hover:underline">Clear search</a>
+                            @endif
                         </div>
                     @endif
                 </div>
@@ -152,6 +178,8 @@
                             if (data.success) {
                                 Swal.fire('Deleted!', 'Report has been deleted.', 'success')
                                     .then(() => location.reload());
+                            } else {
+                                Swal.fire('Error!', data.message, 'error');
                             }
                         });
                 }
