@@ -4,10 +4,14 @@
     </x-slot>
 
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ __('Retrieval') }}
-            </h2>
+        <div class="flex flex-col items-center justify-between sm:flex-row">
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-semibold leading-tight text-gray-800">
+                    {{ __('Retrieval') }}
+                </h2>
+            </div>
+
+            <x-admin.search-form route="retrievals" :searchTerm="$search" placeholder="Search {{ $tab === 'items' ? 'items' : 'history' }} items..." :hiddenInputs="['tab' => $tab]" />
         </div>
     </x-slot>
 
@@ -73,6 +77,10 @@
                                     @endforelse
                                 </tbody>
                             </table>
+
+                            <div class="mt-4 px-4 py-3 sm:px-6">
+                                {{ $foundItems->links() }}
+                            </div>
                         </div>
                     @elseif ($tab === 'history')
                         <div class="overflow-x-auto">
@@ -135,8 +143,26 @@
                                     @endforelse
                                 </tbody>
                             </table>
+
+                            <div class="mt-4 px-4 py-3 sm:px-6">
+                                {{ $retrievals->links() }}
+                            </div>
                         </div>
                     @endif
+
+                    <!-- Search Results Status -->
+                    @if ($search)
+                        <div class="mt-4 text-sm text-gray-500">
+                            @if ($tab === 'items')
+                                {{ $foundItems->total() }} results found for "{{ $search }}" in found items
+                                <a href="{{ route('retrieval', ['tab' => 'items']) }}" class="ml-2 text-purple hover:underline">Clear search</a>
+                            @else
+                                {{ $retrievals->total() }} results found for "{{ $search }}" in retrieval history
+                                <a href="{{ route('retrieval', ['tab' => 'history']) }}" class="ml-2 text-purple hover:underline">Clear search</a>
+                            @endif
+                        </div>
+                    @endif
+
                 </div>
             </div>
         </div>
