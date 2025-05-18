@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LostItemFoundController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProfileController;
@@ -11,9 +12,7 @@ use App\Http\Controllers\Admin\RetrievalController;
 
 // Dashboard page with auth
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Reports verification
     Route::get('/dashboard/verify', [VerifyController::class, 'index'])->name('verify');
