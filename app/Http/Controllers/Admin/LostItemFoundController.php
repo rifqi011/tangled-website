@@ -22,11 +22,25 @@ class LostItemFoundController extends Controller
         $this->whatsAppService = $whatsAppService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $lostItems = LostItem::with(['class', 'category'])->where('status', 'hilang')->latest('lost_date')->get();
+        $search = $request->query('search', '');
+        $perPage = 20;
 
-        return view('admin.lostitemsfound.index', compact('lostItems'));
+        $lostItems = LostItem::with(['class', 'category'])
+            ->where('status', 'hilang')
+            ->when($search, function ($query) use ($search) {
+                return $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('username', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%");
+                });
+            })
+            ->latest('lost_date')
+            ->paginate($perPage)
+            ->withQueryString();
+
+        return view('admin.lostitemsfound.index', compact('lostItems', 'search'));
     }
 
     public function show($slug)

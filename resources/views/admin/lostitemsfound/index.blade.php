@@ -4,10 +4,13 @@
     </x-slot>
 
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
+        <div class="flex flex-col items-center justify-between sm:flex-row">
+            <h2 class="mb-4 text-xl font-semibold leading-tight text-gray-800 sm:mb-0">
                 {{ __('Lost Items Found') }}
             </h2>
+
+            <!-- Search Form Component -->
+            <x-admin.search-form route="lost-item-found" :searchTerm="$search" placeholder="Search lost items..." />
         </div>
     </x-slot>
 
@@ -56,7 +59,20 @@
                                 @endforelse
                             </tbody>
                         </table>
+
+                        <!-- Pagination -->
+                        <div class="mt-4 px-4 py-3 sm:px-6">
+                            {{ $lostItems->links() }}
+                        </div>
                     </div>
+
+                    <!-- Search Results Status -->
+                    @if ($search)
+                        <div class="mt-4 text-sm text-gray-500">
+                            {{ $lostItems->total() }} results found for "{{ $search }}" in lost items
+                            <a href="{{ route('lost-item-found') }}" class="ml-2 text-purple hover:underline">Clear search</a>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -12,13 +12,43 @@ use Illuminate\Validation\Rule;
 
 class ReportsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tab = request('tab', 'lost');
-        $lostItems = LostItem::with(['class', 'category'])->latest('lost_date')->get();
-        $foundItems = FoundItem::with(['category', 'retrievals'])->latest('found_date')->get();
+        $tab = $request->query('tab', 'lost');
+        $search = $request->query('search', '');
+        $perPage = 20;
 
-        return view('admin.reports.index', compact('lostItems', 'foundItems', 'tab'));
+        if ($tab === 'lost') {
+            $lostItems = LostItem::with(['class', 'category'])
+                ->when($search, function ($query) use ($search) {
+                    return $query->where(function ($q) use ($search) {
+                        $q->where('title', 'like', "%{$search}%")
+                            ->orWhere('username', 'like', "%{$search}%")
+                            ->orWhere('description', 'like', "%{$search}%");
+                    });
+                })
+                ->latest('lost_date')
+                ->paginate($perPage)
+                ->withQueryString();
+
+            $foundItems = collect(); // Empty collection when on lost tab
+        } else {
+            $foundItems = FoundItem::with(['category', 'retrievals'])
+                ->when($search, function ($query) use ($search) {
+                    return $query->where(function ($q) use ($search) {
+                        $q->where('title', 'like', "%{$search}%")
+                            ->orWhere('found_location', 'like', "%{$search}%")
+                            ->orWhere('description', 'like', "%{$search}%");
+                    });
+                })
+                ->latest('found_date')
+                ->paginate($perPage)
+                ->withQueryString();
+
+            $lostItems = collect(); // Empty collection when on found tab
+        }
+
+        return view('admin.reports.index', compact('lostItems', 'foundItems', 'tab', 'search'));
     }
 
     public function show($type, $slug)

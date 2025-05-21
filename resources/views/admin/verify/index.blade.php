@@ -4,10 +4,14 @@
     </x-slot>
 
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ __('Report Data Management') }}
-            </h2>
+        <div class="flex flex-col items-center justify-between sm:flex-row">
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-semibold leading-tight text-gray-800">
+                    {{ __('Report Data Management') }}
+                </h2>
+            </div>
+
+            <x-admin.search-form route="verify" :searchTerm="$search" placeholder="Search {{ $tab === 'lost' ? 'lost' : 'found' }} items..." :hiddenInputs="['tab' => $tab]" />
         </div>
     </x-slot>
 
@@ -74,6 +78,10 @@
                                     @endforelse
                                 </tbody>
                             </table>
+
+                            <div class="mt-4 px-4 py-3 sm:px-6">
+                                {{ $lostItems->links() }}
+                            </div>
                         </div>
                     @elseif ($tab === 'found')
                         <div class="overflow-x-auto">
@@ -111,6 +119,23 @@
                                     @endforelse
                                 </tbody>
                             </table>
+
+                            <div class="mt-4 px-4 py-3 sm:px-6">
+                                {{ $foundItems->links() }}
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- Search Results Status -->
+                    @if ($search)
+                        <div class="mt-4 text-sm text-gray-500">
+                            @if ($tab === 'lost')
+                                {{ $lostItems->total() }} results found for "{{ $search }}" in lost items
+                                <a href="{{ route('verify', ['tab' => 'lost']) }}" class="ml-2 text-purple hover:underline">Clear search</a>
+                            @else
+                                {{ $foundItems->total() }} results found for "{{ $search }}" in found items
+                                <a href="{{ route('verify', ['tab' => 'found']) }}" class="ml-2 text-purple hover:underline">Clear search</a>
+                            @endif
                         </div>
                     @endif
                 </div>

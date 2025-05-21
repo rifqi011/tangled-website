@@ -11,22 +11,46 @@ use Illuminate\Support\Facades\Validator;
 
 class RetrievalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $tab = request('tab', 'items');
-        $foundItems = FoundItem::with('category')
-            ->where('status', 'disimpan')
-            ->latest('found_date')
-            ->get();
-        
-        $retrievals = Retrieval::with('foundItem')
-            ->whereHas('foundItem', function ($query) {
-                $query->where('status', 'diambil');
-            })
-            ->latest('retrieval_date')
-            ->get();
+        $perPage = 20;
+        $search = $request->query('search', '');
 
-        return view('admin.retrieval.index', compact('foundItems', 'retrievals', 'tab'));
+        if ($tab === 'items') {
+            $foundItems = FoundItem::with('category')
+                ->where('status', 'disimpan')
+                ->when($search, function ($query) use ($search) {
+                    return $query->where(function ($q) use ($search) {
+                        $q->where('title', 'like', "%{$search}%")
+                            ->orWhere('found_location', 'like', "%{$search}%")
+                            ->orWhere('description', 'like', "%{$search}%");
+                    });
+                })
+                ->latest('found_date')
+                ->paginate($perPage)
+                ->withQueryString();
+
+            $retrievals = collect();
+        } else {
+            $retrievals = Retrieval::with('foundItem')
+                ->whereHas('foundItem', function ($query) use ($search) {
+                    $query->where('status', 'diambil')
+                        ->when($search, function ($q) use ($search) {
+                            return $q->where('title', 'like', "%{$search}%");
+                        });
+                })
+                ->when($search, function ($query) use ($search) {
+                    return $query->orWhere('username', 'like', "%{$search}%");
+                })
+                ->latest('retrieval_date')
+                ->paginate($perPage)
+                ->withQueryString();
+
+            $foundItems = collect();
+        }
+
+        return view('admin.retrieval.index', compact('foundItems', 'retrievals', 'search', 'tab'));
     }
 
     public function show($slug)

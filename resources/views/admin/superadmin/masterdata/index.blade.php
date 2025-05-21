@@ -8,6 +8,8 @@
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 {{ __('Master Data Management') }}
             </h2>
+
+            <x-admin.search-form route="masterdata" :searchTerm="$search" placeholder="Search {{ $tab === 'admins' ? 'admins' : ($tab === 'categories' ? 'categories' : 'classes') }}" :hiddenInputs="['tab' => $tab]" />
         </div>
     </x-slot>
 
@@ -107,6 +109,10 @@
                                     @endforelse
                                 </tbody>
                             </table>
+
+                            <div class="mt-4 px-4 py-3 sm:px-6">
+                                {{ $admins->links() }}
+                            </div>
                         </div>
                     @elseif ($tab === 'categories')
                         <div class="mb-6 flex items-center justify-between">
@@ -174,6 +180,10 @@
                                     @endforelse
                                 </tbody>
                             </table>
+
+                            <div class="mt-4 px-4 py-3 sm:px-6">
+                                {{ $categories->links() }}
+                            </div>
                         </div>
 
                         <!-- Category Modal - For both Create and Edit -->
@@ -277,6 +287,10 @@
                                     @endforelse
                                 </tbody>
                             </table>
+
+                            <div class="mt-4 px-4 py-3 sm:px-6">
+                                {{ $classes->links() }}
+                            </div>
                         </div>
 
                         <!-- Class Modal - For both Create and Edit -->

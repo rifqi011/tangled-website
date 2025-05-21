@@ -18,12 +18,47 @@ class SuperAdminController extends Controller
     public function index(Request $request)
     {
         $tab = $request->query('tab', 'admins');
+        $perPage = 10;
+        $search = $request->query('search', '');
 
-        $admins = User::where('role', 'admin')->get();
-        $categories = Category::all();
-        $classes = ClassModel::all();
+        if ($tab === 'admins') {
+            $admins = User::where('role', 'admin')
+                ->when($request->query('search'), function ($query) use ($request) {
+                    return $query->where('name', 'like', '%' . $request->query('search') . '%')
+                        ->orWhere('email', 'like', '%' . $request->query('search') . '%');
+                })
+                ->latest()
+                ->paginate($perPage)
+                ->withQueryString();
 
-        return view('admin.superadmin.masterdata.index', compact('admins', 'categories', 'classes', 'tab'));
+            $categories = collect(); // Empty collection when on admins tab
+            $classes = collect(); // Empty collection when on admins tab
+        } else if ($tab === 'categories') {
+            $categories = Category::query()
+                ->when($request->query('search'), function ($query) use ($request) {
+                    return $query->where('name', 'like', '%' . $request->query('search') . '%');
+                })
+                ->latest()
+                ->paginate(10)
+                ->withQueryString();
+
+            $classes = collect(); // Empty collection when on categories tab
+            $admins = collect(); // Empty collection when on categories tab
+        } else {
+            $classes = ClassModel::query()
+                ->when($request->query('search'), function ($query) use ($request) {
+                    return $query->where('name', 'like', '%' . $request->query('search') . '%');
+                })
+                ->latest()
+                ->paginate($perPage)
+                ->withQueryString();
+
+            $categories = collect(); // Empty collection when on classes tab
+            $admins = collect(); // Empty collection when on classes tab
+        }
+
+
+        return view('admin.superadmin.masterdata.index', compact('admins', 'categories', 'classes', 'tab', 'search'));
     }
 
     /**
