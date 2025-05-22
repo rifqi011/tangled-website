@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <div id="filter-modal" class="absolute -translate-y-[160%] rounded-3xl bg-white p-3 pb-4 shadow-card transition-all duration-300 ease-out z-50">
+    <div id="filter-modal" class="absolute -translate-y-[160%] rounded-3xl bg-white p-3 pb-4 shadow-card transition-all duration-300 ease-out z-50 lg:-translate-y-0 lg:right-0 lg:hidden lg:w-[400px]">
         <div class="w-full space-y-3">
             <h3 class="text-lg">Kata kunci:</h3>
             <div class="flex flex-wrap gap-2">

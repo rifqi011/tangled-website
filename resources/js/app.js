@@ -112,6 +112,7 @@ if (filterButton) {
 
         const filterModal = document.getElementById("filter-modal");
         filterModal.classList.toggle("-translate-y-[160%]");
+        filterModal.classList.toggle("lg:hidden");
 
         topBar.classList.toggle("rotate-45");
         topBar.classList.toggle("translate-y-[10px]");
