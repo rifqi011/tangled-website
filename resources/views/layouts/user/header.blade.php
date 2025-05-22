@@ -10,11 +10,13 @@
 
 @endphp
 
-<header id="header" class="{{ $isHeaderHidden ? 'hidden' : 'flex' }} relative left-0 top-0 mb-3 items-center justify-center bg-white px-[5%] pb-5 pt-3">
+<header id="header" class="{{ $isHeaderHidden ? 'hidden' : 'flex' }} relative left-0 top-0 mb-3 items-center justify-center bg-white px-[5%] pb-5 pt-3 lg:!flex">
     <div class="flex w-full items-center justify-between">
         <a href="/">
             <img src="{{ asset('images/logo-text.svg') }}" alt="">
         </a>
+
+        <x-user.desktop-navbar></x-user.desktop-navbar>
 
         @if (auth()->user())
             <x-user.button href="/dashboard">Dashboard</x-user.button>
