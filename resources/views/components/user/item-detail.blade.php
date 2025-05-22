@@ -9,21 +9,23 @@
         </a>
     </div>
 
-    <div class="mb-8 flex flex-col gap-1">
-        <div class="w-full overflow-hidden rounded-3xl bg-center object-cover">
+    <div class="mb-8 flex flex-col gap-1 lg:flex-row lg:gap-5">
+        <div class="w-full overflow-hidden rounded-3xl bg-center object-cover lg:max-w-[50%]">
             <img src="{{ asset($item->photo) }}" class="aspect-square w-full object-cover" alt="{{ $item->title }}" loading="lazy">
         </div>
 
-        <x-user.form.divider />
-
-        {{ $slot }}
-
-        @if ($includeContactAdmin)
+        <div class="flex flex-col gap-1"">
             <x-user.form.divider />
 
-            <x-user.button href="https://wa.me/{{ env('ADMIN_PHONE_NUMBER') }}?text=Assalamu'alaikum%20Wr.Wb.%0A%0APermisi%20pak,%20barang%20berjudul%20{{ $item->title }}%20apakah%20masih%20disimpan%20di%20kesiswaan?%0ABarang%20tersebut%20adalah%20milik%20saya.%20Saya%20mohon%20konfirmasi%20dan%20waktu%20pengambilannya.%0ATerima%20kasih.%0A%0AWassalamu'alaikum%20Wr.Wb." target="_blank">
-                Hubungi Admin
-            </x-user.button>
-        @endif
+            {{ $slot }}
+
+            @if ($includeContactAdmin)
+                <x-user.form.divider />
+
+                <x-user.button href="https://wa.me/{{ env('ADMIN_PHONE_NUMBER') }}?text=Assalamu'alaikum%20Wr.Wb.%0A%0APermisi%20pak,%20barang%20berjudul%20{{ $item->title }}%20apakah%20masih%20disimpan%20di%20kesiswaan?%0ABarang%20tersebut%20adalah%20milik%20saya.%20Saya%20mohon%20konfirmasi%20dan%20waktu%20pengambilannya.%0ATerima%20kasih.%0A%0AWassalamu'alaikum%20Wr.Wb." target="_blank">
+                    Hubungi Admin
+                </x-user.button>
+            @endif
+        </div>
     </div>
 </x-user.layout>
