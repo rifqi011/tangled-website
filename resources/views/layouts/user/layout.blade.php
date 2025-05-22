@@ -14,7 +14,7 @@
     <meta name="description" content="Tangled merupakan sebuah situs karya siswa SMK Negeri 1 Purwokerto untuk mempermudah pencarian barang hilang di lingkungan sekolah.">
 </head>
 
-<body>
+<body class="max-w-[1024px] mx-auto">
     <x-user.header></x-user.header>
 
     <x-user.navbar></x-user.navbar>
