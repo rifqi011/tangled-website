@@ -40,7 +40,7 @@
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{{ $item->username }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{{ $item->lost_date }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
-                                                <a href="{{ route('reports.show', $item->slug) }}" class="mr-3 text-purple hover:underline">View</a>
+                                                <a href="{{ route('reports.show', ['type' => 'lost', 'slug' => $item->slug]) }}" class="mr-3 text-purple hover:underline">View</a>
                                             </td>
                                         </tr>
                                     @empty
@@ -76,7 +76,7 @@
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{{ $item->found_location }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{{ $item->found_date }}</td>
                                             <td class="whitespace-nowrap px-6 py-4 text-sm font-medium">
-                                                <a href="{{ route('reports.show', $item->slug) }}" class="mr-3 text-purple hover:underline">View</a>
+                                                <a href="{{ route('reports.show', ['type' => 'found', 'slug' => $item->slug]) }}" class="mr-3 text-purple hover:underline">View</a>
                                             </td>
                                         </tr>
                                     @empty
