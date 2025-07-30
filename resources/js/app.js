@@ -130,11 +130,21 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Enhanced search filter functionality
+    // Enhanced search filter functionality - FIXED VERSION
     const searchForm = document.getElementById("search-form");
 
     if (searchForm) {
-        // Category filter buttons (only visual feedback, no form submission)
+        // Initialize filter state variables with current values from server
+        let currentCategory =
+            document.getElementById("category_id")?.value || "Semua";
+        let currentItemType =
+            document.getElementById("item_type_id")?.value || "Semua";
+        let currentStartDate =
+            document.getElementById("start_date_id")?.value || "";
+        let currentEndDate =
+            document.getElementById("end_date_id")?.value || "";
+
+        // Category filter buttons
         const categoryButtons = document.querySelectorAll(".category-btn");
         const categoryInput = document.getElementById("category_id");
 
@@ -151,13 +161,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     this.classList.add("!bg-purple", "!text-white");
                     this.classList.remove("!bg-gray-100", "!text-black");
 
-                    // Store selected category but don't submit yet
-                    window.selectedCategory = this.getAttribute("data-id");
+                    // Update current selection
+                    currentCategory = this.getAttribute("data-id");
                 });
             });
         }
 
-        // Item type filter buttons (only visual feedback, no form submission)
+        // Item type filter buttons
         const itemTypeButtons = document.querySelectorAll(".item-type-btn");
         const itemTypeInput = document.getElementById("item_type_id");
 
@@ -174,13 +184,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     this.classList.add("!bg-purple", "!text-white");
                     this.classList.remove("!bg-gray-100", "!text-black");
 
-                    // Store selected item type but don't submit yet
-                    window.selectedItemType = this.getAttribute("data-type");
+                    // Update current selection
+                    currentItemType = this.getAttribute("data-type");
                 });
             });
         }
 
-        // Date range filter functionality (no auto-update)
+        // Date range filter functionality
         const startDateInput = document.getElementById("start_date");
         const endDateInput = document.getElementById("end_date");
         const startDateHidden = document.getElementById("start_date_id");
@@ -188,17 +198,35 @@ document.addEventListener("DOMContentLoaded", function () {
         const clearDatesBtn = document.getElementById("clear-dates");
         const applyFiltersBtn = document.getElementById("apply-filters");
 
-        // Clear dates functionality
+        // Update current selections when date inputs change
+        if (startDateInput) {
+            startDateInput.addEventListener("change", function () {
+                currentStartDate = this.value;
+            });
+        }
+
+        if (endDateInput) {
+            endDateInput.addEventListener("change", function () {
+                currentEndDate = this.value;
+            });
+        }
+
+        // Clear/Reset all filters functionality
         if (clearDatesBtn) {
             clearDatesBtn.addEventListener("click", function () {
+                // Reset all current selections
+                currentCategory = "Semua";
+                currentItemType = "Semua";
+                currentStartDate = "";
+                currentEndDate = "";
+
+                // Clear date inputs
                 if (startDateInput) startDateInput.value = "";
                 if (endDateInput) endDateInput.value = "";
-                if (startDateHidden) startDateHidden.value = "";
-                if (endDateHidden) endDateHidden.value = "";
 
-                // Reset stored values
-                window.selectedCategory = null;
-                window.selectedItemType = null;
+                // Clear search input
+                const searchInput = document.getElementById("search");
+                if (searchInput) searchInput.value = "";
 
                 // Reset visual state of all filter buttons
                 categoryButtons.forEach((btn) => {
@@ -211,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     btn.classList.add("!bg-gray-100", "!text-black");
                 });
 
-                // Set default active states
+                // Set default active states (Semua)
                 const defaultCategoryBtn = document.querySelector(
                     '.category-btn[data-id="Semua"]'
                 );
@@ -241,54 +269,54 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
                 }
 
-                // Submit form to clear all filters
+                // Update hidden inputs and submit
+                if (categoryInput) categoryInput.value = "Semua";
+                if (itemTypeInput) itemTypeInput.value = "Semua";
+                if (startDateHidden) startDateHidden.value = "";
+                if (endDateHidden) endDateHidden.value = "";
+
+                // Submit form to apply reset
                 searchForm.submit();
             });
         }
 
-        // Apply filters functionality - this is where all filters are applied
+        // Apply filters functionality
         if (applyFiltersBtn) {
             applyFiltersBtn.addEventListener("click", function () {
-                // Update category hidden input
+                // Update all hidden inputs with current selections
                 if (categoryInput) {
-                    categoryInput.value =
-                        window.selectedCategory ||
-                        document
-                            .querySelector(".category-btn.!bg-purple")
-                            ?.getAttribute("data-id") ||
-                        "Semua";
+                    categoryInput.value = currentCategory;
                 }
 
-                // Update item type hidden input
                 if (itemTypeInput) {
-                    itemTypeInput.value =
-                        window.selectedItemType ||
-                        document
-                            .querySelector(".item-type-btn.!bg-purple")
-                            ?.getAttribute("data-type") ||
-                        "Semua";
+                    itemTypeInput.value = currentItemType;
                 }
 
-                // Update date hidden inputs
-                if (startDateInput && startDateHidden) {
-                    startDateHidden.value = startDateInput.value;
-                }
-                if (endDateInput && endDateHidden) {
-                    endDateHidden.value = endDateInput.value;
+                if (startDateHidden) {
+                    startDateHidden.value = currentStartDate;
                 }
 
-                // Submit form with all filters
+                if (endDateHidden) {
+                    endDateHidden.value = currentEndDate;
+                }
+
+                // Submit form with all current filters
                 searchForm.submit();
             });
         }
 
-        // Search input - only manual submit via search icon or enter key
+        // Search input - submit on Enter key or search icon click
         const searchInput = document.getElementById("search");
         if (searchInput) {
-            // Remove auto-submit functionality
-            // Only submit when user presses Enter
             searchInput.addEventListener("keypress", function (event) {
                 if (event.key === "Enter") {
+                    // Update hidden inputs before submitting
+                    if (categoryInput) categoryInput.value = currentCategory;
+                    if (itemTypeInput) itemTypeInput.value = currentItemType;
+                    if (startDateHidden)
+                        startDateHidden.value = currentStartDate;
+                    if (endDateHidden) endDateHidden.value = currentEndDate;
+
                     searchForm.submit();
                 }
             });
@@ -302,14 +330,34 @@ window.Swal = Swal;
 // search icon for submit
 document.addEventListener("DOMContentLoaded", function () {
     const searchIcon = document.getElementById("search-icon");
-    const form = document.querySelector("form");
+    const searchForm = document.getElementById("search-form");
     const searchInput = document.getElementById("search");
 
-    if (searchIcon && searchInput) {
+    if (searchIcon && searchForm) {
         searchIcon.addEventListener("click", function () {
-            if (form) {
-                form.submit();
+            // Get current filter values before submitting
+            const categoryInput = document.getElementById("category_id");
+            const itemTypeInput = document.getElementById("item_type_id");
+            const startDateInput = document.getElementById("start_date");
+            const endDateInput = document.getElementById("end_date");
+            const startDateHidden = document.getElementById("start_date_id");
+            const endDateHidden = document.getElementById("end_date_id");
+
+            // Update hidden inputs with current filter selections
+            if (categoryInput && window.currentCategory) {
+                categoryInput.value = window.currentCategory;
             }
+            if (itemTypeInput && window.currentItemType) {
+                itemTypeInput.value = window.currentItemType;
+            }
+            if (startDateInput && startDateHidden) {
+                startDateHidden.value = startDateInput.value;
+            }
+            if (endDateInput && endDateHidden) {
+                endDateHidden.value = endDateInput.value;
+            }
+
+            searchForm.submit();
         });
     }
 });
