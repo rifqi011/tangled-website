@@ -34,7 +34,7 @@
                     <span class="text-sm font-medium">{{ $menuLink['name'] }}</span>
                 </a>
                 
-                <span class="{{ $isActive ? 'w-12' : 'w-0' }} absolute left-1/2 bottom-0 h-1 -translate-x-1/2 rounded-b-lg bg-purple transition-all duration-200 ease-in-out"></span>
+                <span class="{{ $isActive ? 'w-12' : 'w-0' }} absolute left-1/2 bottom-0 h-1 -translate-x-1/2 rounded-lg bg-purple transition-all duration-200 ease-in-out"></span>
             </li>
         @endforeach
     </ul>
