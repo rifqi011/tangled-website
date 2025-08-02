@@ -1,6 +1,6 @@
 @props(['images' => []])
 
-<div class="relative">
+<div class="relative aspect-[16/8]">
     {{-- Swiper --}}
     <div class="swiper relative overflow-visible">
         <div class="swiper-wrapper">
