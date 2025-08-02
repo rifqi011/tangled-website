@@ -29,6 +29,8 @@
 
         <h3 class="mt-2 text-2xl font-semibold">{{ Str::limit($item->title, 25) }}</h3>
 
+        <p class="my-1 text-gray-600 text-sm">{{ Str::limit($item->description) }}</p>
+
         <p>{{ $locationLabel }} <strong>{{ $locationField }}</strong> pada {{ \Carbon\Carbon::parse($dateField)->locale('id')->translatedFormat('d F Y') }}</p>
     </div>
 </a>
