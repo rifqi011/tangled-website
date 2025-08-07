@@ -9,6 +9,10 @@ use App\Http\Controllers\User\FoundItemController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::redirect('/home', '/', 301);
 
+Route::get('/developers', function () {
+    return view('user.developers');
+});
+
 // found items page
 Route::get('/found-items', [FoundItemController::class, 'index'])->name('found-items.index');
 Route::get('/found-items/{slug}', [FoundItemController::class, 'show'])->name('found-items.show');
